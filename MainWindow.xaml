@@ -1,0 +1,36 @@
+﻿<Window x:Class="MySleepHelperApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MySleepHelperApp"
+        mc:Ignorable="d"
+        Title="Sleep Helper" Height="600" Width="800"
+        MinWidth="300" MaxWidth="800"
+        MinHeight="225" MaxHeight="600"
+        SizeToContent="Manual"
+        ResizeMode="CanResize">
+    <Grid x:Name="myGrid" SizeChanged="Grid_SizeChanged">
+        <Button 
+        Height="80" 
+        FontSize="18" 
+        FontFamily="Microsoft YaHei" 
+        Margin="0,309,0,0" 
+        VerticalAlignment="Top" 
+        HorizontalAlignment="Center" 
+        Width="310"
+        HorizontalContentAlignment="Center"
+        VerticalContentAlignment="Center"
+        Padding="10" 
+        BorderBrush="#FFFFAAE4"
+        FontWeight="Bold" 
+        BorderThickness="5,5,5,5"
+        Background="#FFFDEEFF">
+            <TextBlock TextAlignment="Center" TextWrapping="Wrap">
+            Запланировать выключение<LineBreak/>
+            компьютера
+            </TextBlock>
+        </Button>
+
+    </Grid>
+</Window>
