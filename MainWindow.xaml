@@ -3,31 +3,110 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MySleepHelperApp"
         mc:Ignorable="d"
-        Title="Sleep Helper" Height="600" Width="800"
-        MinWidth="300" MaxWidth="800"
-        MinHeight="225" MaxHeight="600"
-        SizeToContent="Manual"
-        ResizeMode="CanResize">
-    <Grid x:Name="myGrid" SizeChanged="Grid_SizeChanged">
-        <Button 
-        Height="80" 
-        FontSize="18" 
-        FontFamily="Microsoft YaHei" 
-        Width="310"
-        HorizontalContentAlignment="Center"
-        VerticalContentAlignment="Center"
-        Padding="10" 
-        BorderBrush="#FFFFAAE4"
-        FontWeight="Bold" 
-        BorderThickness="5,5,5,5"
-        Background="#FFFDEEFF">
-            <TextBlock TextAlignment="Center" TextWrapping="Wrap">
-            Запланировать выключение<LineBreak/>
-            компьютера
-            </TextBlock>
-        </Button>
+        Title="Sleep Helper" 
+        Width="600"
+        Height="450"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="#FFF8F2FF">
 
+    <!-- Основной контейнер -->
+    <Grid Margin="15">
+        <!-- 4 строки с вашими размерами -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <!-- Вкладки -->
+            <RowDefinition Height="80"/>
+            <!-- Заголовок -->
+            <RowDefinition Height="100"/>
+            <!-- Основное содержимое -->
+            <RowDefinition Height="100"/>
+            <!-- Кнопка -->
+        </Grid.RowDefinitions>
+
+        <!-- Заглушка для будущих вкладок -->
+        <Border Grid.Row="0" 
+                Background="#FFE6D9F9" 
+                CornerRadius="5"
+                BorderBrush="#FFB89FE5"
+                BorderThickness="1">
+            <TextBlock Text="Вкладки будут здесь" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="#FF7A5CA8"
+                       FontStyle="Italic"/>
+        </Border>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Настройка таймера выключения"
+                   Grid.Row="1"
+                   FontSize="20" 
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Foreground="#FF7A5CA8" Margin="0,0,0,8"/>
+
+        <!-- Центральная панель с полями ввода -->
+        <Grid Grid.Row="2" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Поля ввода времени -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <!-- Часы -->
+                <StackPanel Margin="10">
+                    <TextBlock Text="Часы" FontSize="16" HorizontalAlignment="Center" 
+                               Foreground="#FF5C3C8A" Margin="0,0,0,5"/>
+                    <TextBox Name="HoursTextBox" Width="70" Height="50" FontSize="24"
+                             Text="00" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                             Background="#FFFFFF" BorderBrush="#FFD9C9F0" BorderThickness="2"
+                             Foreground="#FF7A5CA8" FontWeight="Bold"/>
+                </StackPanel>
+
+                <!-- Минуты -->
+                <StackPanel Margin="10">
+                    <TextBlock Text="Минуты" FontSize="16" HorizontalAlignment="Center" 
+                               Foreground="#FF5C3C8A" Margin="0,0,0,5"/>
+                    <TextBox Name="MinutesTextBox" Width="70" Height="50" FontSize="24"
+                             Text="00" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                             Background="#FFFFFF" BorderBrush="#FFD9C9F0" BorderThickness="2"
+                             Foreground="#FF7A5CA8" FontWeight="Bold"/>
+                </StackPanel>
+
+                <!-- Секунды -->
+                <StackPanel Margin="10">
+                    <TextBlock Text="Секунды" FontSize="16" HorizontalAlignment="Center" 
+                               Foreground="#FF5C3C8A" Margin="0,0,0,5"/>
+                    <TextBox Name="SecondsTextBox" Width="70" Height="50" FontSize="24"
+                             Text="00" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                             Background="#FFFFFF" BorderBrush="#FFD9C9F0" BorderThickness="2"
+                             Foreground="#FF7A5CA8" FontWeight="Bold"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <!-- Кнопка -->
+        <Button Grid.Row="3"
+                Height="65" 
+                FontSize="16" 
+                Width="300"
+                HorizontalAlignment="Center"    
+                VerticalAlignment="Center"
+                Padding="10" 
+                BorderBrush="#FFB89FE5"
+                FontWeight="Bold" 
+                BorderThickness="3"
+                Background="#FFE6D9F9"
+                Foreground="#FF5C3C8A">
+            <TextBlock Text="Запланировать выключение компьютера" 
+                       TextWrapping="Wrap" 
+                       TextAlignment="Center" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"/>
+        </Button>
     </Grid>
 </Window>
