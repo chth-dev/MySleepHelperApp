@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         Background="#FFF8F2FF">
 
-    <!-- Основной контейнер -->
+    <!-- Основной контейнер окна -->
     <Grid Margin="15">
         <!-- 4 строки с вашими размерами -->
         <Grid.RowDefinitions>
