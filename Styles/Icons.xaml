@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Только основные иконки -->
+    <BitmapImage x:Key="HomeIcon" 
+                 UriSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/home_icon.png"/>
+
+    <BitmapImage x:Key="TimerIcon" 
+                 UriSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/timer_icon.png"/>
+
+    <BitmapImage x:Key="BrightnessIcon" 
+                 UriSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/brightness_icon.png"/>
+
+    <BitmapImage x:Key="KeyboardIcon" 
+                 UriSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/keyboard_icon.png"/>
+
+    <BitmapImage x:Key="HelpIcon" 
+                 UriSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/help_icon.png"/>
+</ResourceDictionary>

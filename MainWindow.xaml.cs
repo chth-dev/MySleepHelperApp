@@ -20,6 +20,8 @@ namespace MySleepHelperApp
         private TimerService _timerService;
 
         //........................................... 1.Конструктор (MainWindow())
+
+        // Конструктор главного окна. Инициализирует сервис таймера и настраивает подписки на события.
         #region Конструктор (MainWindow())
         public MainWindow()
         {
@@ -33,20 +35,16 @@ namespace MySleepHelperApp
             _timerService.TimerFinished += () => // Когда таймер завершается
             {
                 MessageBox.Show("Спокойной ночи.");
-
-                // 3. Возвращаем интерфейс в исходное состояние:
-                TimerPanel.Visibility = Visibility.Collapsed;
-                InputPanel.Visibility = Visibility.Visible;
-                ScheduleButton.Visibility = Visibility.Visible;
-                CancelButton.Visibility = Visibility.Collapsed;
+                ResetUI();
             };
         }
         #endregion
 
-        //........................................... 2.UI-обработчики: Обработчики текстовых полей
+        //........................................... 2.Обработчики текстовых полей
         #region Обработчики текстовых полей
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        // Обрабатывает получение фокуса текстовым полем: скрывает плейсхолдер "00".
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e) 
         {
             if (sender is TextBox textBox && textBox.Parent is Grid grid)
             {
@@ -62,7 +60,9 @@ namespace MySleepHelperApp
             }
         }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+
+        // Обрабатывает потерю фокуса: валидирует значение, форматирует вывод и управляет плейсхолдером.
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e) 
         {
             if (sender is TextBox textBox && textBox.Parent is Grid grid)
             {
@@ -86,50 +86,56 @@ namespace MySleepHelperApp
             }
         }
 
+
+        // Проверяет вводимые символы: разрешает только цифры и проверяет допустимость значений.
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            // 1. Проверка вводимого символа
+            // Блокируем нецифровые символы
             if (!char.IsDigit(e.Text, 0))
             {
                 e.Handled = true;
                 return;
             }
 
-            // 2. Безопасное приведение типа
+            // Проверяем, что событие вызвано TextBox
             if (sender is not TextBox textBox)
             {
                 e.Handled = true;
                 return;
             }
 
-            // 3. Защита от null и пустого значения
+            // Получаем текущий текст (с защитой от null)
             string currentText = textBox.Text ?? string.Empty;
 
-            try
+            // Удаляем выделенный текст (если есть выделение)
+            int selectionStart = textBox.SelectionStart;
+            int selectionLength = textBox.SelectionLength;
+            if (selectionLength > 0)
             {
-                // 4. Формируем новое значение с проверкой позиции курсора
-                string newText = currentText.Insert(
-                    Math.Clamp(textBox.CaretIndex, 0, currentText.Length),
-                    e.Text);
-
-                // 5. Проверка диапазона значений
-                if (string.IsNullOrEmpty(newText)) return;
-
-                int maxValue = textBox.Name == "HoursTextBox" ? 23 : 59;
-                if (int.TryParse(newText, out int value) && value > maxValue)
-                {
-                    e.Handled = true;
-                }
+                currentText = currentText.Remove(selectionStart, selectionLength);
             }
-            catch
+
+            // Вставляем новый символ в позицию курсора
+            string newText = currentText.Insert(selectionStart, e.Text);
+
+            // Проверяем максимальное значение (23 для часов, 59 для минут/секунд)
+            int maxValue = textBox.Name == "HoursTextBox" ? 23 : 59;
+            if (int.TryParse(newText, out int value) && value > maxValue)
             {
-                e.Handled = true; // На всякий случай
+                e.Handled = true;
+                return;
             }
+
+            // Применяем изменения вручную (для обработки выделения)
+            textBox.Text = newText;
+            textBox.CaretIndex = selectionStart + 1; // Перемещаем курсор после ввода
+            e.Handled = true; // Блокируем стандартную обработку
         }
 
-        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+
+        // Блокирует нежелательные клавиши: пробел, Enter и Escape.
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e) 
         {
-            // Блокируем нажатие пробела, Enter, Escape
             if (e.Key == Key.Space ||
                 e.Key == Key.Enter ||
                 e.Key == Key.Escape)
@@ -137,6 +143,9 @@ namespace MySleepHelperApp
                 e.Handled = true;
             }
         }
+
+
+        // Проверяет и корректирует значение текстового поля, возвращая валидное число.
         private static int GetSafeValue(TextBox textBox, bool isHours = false)
         {
             // 1. Обрабатываем пустое поле
@@ -164,10 +173,13 @@ namespace MySleepHelperApp
 
             return value;
         }
+
         #endregion
 
-        //........................................... 2.UI-обработчики: Кнопки действий
+        //........................................... 3.Обработчики кнопок
         #region Кнопки действий
+
+        // Обрабатывает нажатие кнопки "Запланировать": запускает таймер выключения.
         private void ScheduleShutdown_Click(object sender, RoutedEventArgs e)
         {
             // Используем наш метод GetSafeValue для получения значений с ограничениями
@@ -200,20 +212,39 @@ namespace MySleepHelperApp
             CancelButton.Visibility = Visibility.Visible;
         }
 
+
+        // Обрабатывает нажатие кнопки "Отменить": останавливает таймер и сбрасывает состояние.
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             _timerService.Stop();
             SystemCommandService.CancelShutdown();
+            ResetUI();
+        }
+        #endregion
 
-            // Возврат к исходному интерфейсу
+        //........................................... 4.Вспомогательные методы
+
+        // Сбрасывает интерфейс в исходное состояние.
+        private void ResetUI()
+        {
             TimerPanel.Visibility = Visibility.Collapsed;
             InputPanel.Visibility = Visibility.Visible;
             ScheduleButton.Visibility = Visibility.Visible;
             CancelButton.Visibility = Visibility.Collapsed;
-
-            // Сброс таймера
             CountdownText.Text = "00:00:00";
         }
-        #endregion 
+
+        // Обработчик клика по кнопке сворачивания окна.
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        // Обработчик клика по кнопке закрытия окна.
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

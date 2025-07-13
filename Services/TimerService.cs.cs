@@ -13,7 +13,7 @@ namespace MySleepHelperApp.Services
     {
         private int _remainingSeconds;
 
-        private readonly DispatcherTimer _timer; // readonly добавляет защиту
+        private readonly DispatcherTimer _timer;
 
         public event Action<string> TimerUpdated = delegate { };
         public event Action TimerFinished = delegate { };

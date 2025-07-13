@@ -9,6 +9,8 @@ namespace MySleepHelperApp.Services
 {
     public static class SystemCommandService
     {
+
+        // Выключает компьютер через указанное время.
         public static void ShutdownComputer(int seconds)
         {
             Process process = new(); // Создаём процесс (как если бы cmd.exe запустили вручную)
@@ -26,6 +28,7 @@ namespace MySleepHelperApp.Services
             process.Start(); // Запускаем процесс
         }
 
+        // Отменяет запланированное выключение. 
         public static void CancelShutdown()
         {
             Process process = new();

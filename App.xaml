@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:MySleepHelperApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
-    </Application.Resources>
+
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="Styles/MainStyles.xaml"/>
+                    <ResourceDictionary Source="Styles/Icons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Application.Resources>
+
 </Application>
