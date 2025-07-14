@@ -28,7 +28,11 @@
         </Grid.RowDefinitions>
 
         <!-- Верхняя панель с кнопками -->
-        <Border Grid.Row="0" Style="{StaticResource TopPanelStyle}">
+        <Border Grid.Row="0" 
+            Style="{StaticResource TopPanelStyle}"
+            MouseLeftButtonDown="TopPanel_MouseLeftButtonDown"
+            MouseMove="TopPanel_MouseMove"
+            MouseLeftButtonUp="TopPanel_MouseLeftButtonUp">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -118,8 +122,6 @@
             </ContentControl.Resources>
         </ContentControl>
 
-        <!-- Заголовок -->
-
         <!-- Центральная панель с полями ввода -->
         <Grid Grid.Row="3" VerticalAlignment="Top" Margin="0,19,0,0" Height="95">
             <Grid.ColumnDefinitions>
@@ -207,55 +209,70 @@
         </Grid>
 
         <!-- Кнопки -->
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,15,20" Width="240">
+        <Grid Grid.Row="4" HorizontalAlignment="Right" Margin="0,0,15,20">
+            <!-- Кнопка "Запланировать" (видна по умолчанию) -->
             <Button x:Name="ScheduleButton"
-                    Style="{StaticResource PrimaryButton}"
-                    Height="60" 
-                    FontSize="16" 
-                    Width="240"
-                    Padding="10" 
-                    Click="ScheduleShutdown_Click">
+            Style="{StaticResource PrimaryButton}"
+            Height="60" 
+            Width="240"
+            FontSize="18"
+            Padding="10"
+            Click="ScheduleShutdown_Click"
+            Visibility="Visible">
+                <!-- По умолчанию видна -->
                 <TextBlock Text="Запланировать выключение компьютера" 
-                           TextWrapping="Wrap" 
-                           TextAlignment="Center" 
-                           HorizontalAlignment="Center" 
-                           VerticalAlignment="Center" 
-                           Width="215" 
-                           FontSize="16" 
-                           FontFamily="Epilepsy Sans"/>
+                   TextWrapping="Wrap" 
+                   TextAlignment="Center" 
+                   FontSize="18" 
+                   FontFamily="Epilepsy Sans"/>
             </Button>
 
+            <!-- Кнопка "Отменить" (изначально скрыта) -->
             <Button x:Name="CancelButton"
-                    Style="{StaticResource PrimaryButton}"
-                    Height="60" 
-                    FontSize="16" 
-                    Width="240"
-                    Padding="10" 
-                    Click="CancelButton_Click" 
-                    Margin="10,0,0,0"
-                    Visibility="Collapsed">
+            Style="{StaticResource PrimaryButton}"
+            Height="60" 
+            Width="240"
+            FontSize="18"
+            Padding="10"
+            Click="CancelButton_Click"
+            Visibility="Collapsed">
+                <!-- Изначально скрыта -->
                 <TextBlock Text="Отменить выключение компьютера" 
-                           TextWrapping="Wrap" 
-                           TextAlignment="Center" 
-                           HorizontalAlignment="Center" 
-                           VerticalAlignment="Center" 
-                           Width="215" 
-                           FontSize="18"
-                           FontFamily="Epilepsy Sans"/>
+                   TextWrapping="Wrap" 
+                   TextAlignment="Center" 
+                   FontSize="18" 
+                   FontFamily="Epilepsy Sans"/>
             </Button>
-        </StackPanel>
+        </Grid>
 
         <!-- Таймер -->
         <Grid x:Name="TimerPanel" 
               Visibility="Collapsed"
               Grid.Row="3" 
               HorizontalAlignment="Center"
-              VerticalAlignment="Center" Height="0" Width="0">
+              VerticalAlignment="Top" Height="100" Width="300" Margin="0,28,0,0">
             <TextBlock x:Name="CountdownText"
                        Style="{StaticResource HeaderTextStyle}"
-                       FontSize="60"
-                       Text="00:00:00"/>
+                       FontSize="70"
+                       Text="00:00:00" VerticalAlignment="Top"/>
         </Grid>
+
+        <!-- Изображение в левом нижнем углу -->
+        <Image Source="{StaticResource ShutdownImage}"
+       Width="263"
+       Height="264"
+       HorizontalAlignment="Left"
+       VerticalAlignment="Top"
+       Margin="41,76,0,0" Grid.Row="3" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="7.561"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
 
     </Grid>
 </Window>

@@ -222,7 +222,57 @@ namespace MySleepHelperApp
         }
         #endregion
 
-        //........................................... 4.Вспомогательные методы
+
+        //........................................... 4.Обработчики верхней панели
+
+        // Обработчик клика по кнопке сворачивания окна.
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+
+        // Обработчик клика по кнопке закрытия окна.
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+
+        // Переменные для отслеживания состояния перемещения
+        private bool _isDragging = false; // Флаг: идёт ли перетаскивание
+        private Point _startPoint;       // Точка, где была нажата ЛКМ
+
+
+        // Обработчик нажатия ЛКМ на верхней панели
+        private void TopPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _isDragging = true; // Активируем режим перетаскивания
+            _startPoint = e.GetPosition(this); // Запоминаем позицию клика относительно окна
+            ((UIElement)sender).CaptureMouse(); // "Захватываем" мышь для панели
+        }
+
+
+        // Обработчик движения мыши при зажатой ЛКМ
+        private void TopPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!_isDragging) return; // Если не в режиме перетаскивания - выходим
+
+            Point currentPoint = e.GetPosition(this); // Текущая позиция курсора
+                                                      // Вычисляем новую позицию окна:
+            this.Left += currentPoint.X - _startPoint.X; // Смещение по X
+            this.Top += currentPoint.Y - _startPoint.Y;  // Смещение по Y
+        }
+
+
+        // Обработчик отпускания ЛКМ
+        private void TopPanel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            _isDragging = false; // Деактивируем режим перетаскивания
+            ((UIElement)sender).ReleaseMouseCapture(); // Освобождаем мышь
+        }
+
+        //........................................... 5.Вспомогательные методы
 
         // Сбрасывает интерфейс в исходное состояние.
         private void ResetUI()
@@ -233,18 +283,5 @@ namespace MySleepHelperApp
             CancelButton.Visibility = Visibility.Collapsed;
             CountdownText.Text = "00:00:00";
         }
-
-        // Обработчик клика по кнопке сворачивания окна.
-        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
-
-        // Обработчик клика по кнопке закрытия окна.
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
     }
 }

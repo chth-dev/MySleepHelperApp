@@ -3,7 +3,7 @@
 
     <!-- 1. ЦВЕТА -->
     <SolidColorBrush x:Key="AccentBrush" Color="#FF7853A7"/>
-    <SolidColorBrush x:Key="ButtonColor" Color="#FFF9E4FF"/>
+    <SolidColorBrush x:Key="ButtonColor" Color="#FFE6D9F9"/>
     <SolidColorBrush x:Key="LightPurple" Color="#FFE6D9F9"/>
     <SolidColorBrush x:Key="DarkPurple" Color="#FF5C3C8A"/>
     <SolidColorBrush x:Key="MediumPurple" Color="#FF7A5CA8"/>
@@ -25,7 +25,7 @@
         <Setter Property="Background" Value="{StaticResource WindowBackground}"/>
         <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderGradient}"/>
-        <Setter Property="BorderThickness" Value="5"/>
+        <Setter Property="BorderThickness" Value="7"/>
     </Style>
 
     <!-- 4. СТИЛЬ ВЕРХНЕЙ ПАНЕЛИ -->
@@ -56,18 +56,23 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}">
+                    <Border x:Name="border" 
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="3"
+                        CornerRadius="2">
                         <ContentPresenter HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center"/>
+                                    VerticalAlignment="Center"/>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Только рамка при наведении -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#20FFFFFF"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <!-- 7. СТИЛЬ ОСНОВНЫХ КНОПОК -->
@@ -93,11 +98,8 @@
                     <ControlTemplate.Triggers>
                         <!-- Триггеры внутри шаблона -->
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource MediumPurple}"/>
-                            <Setter TargetName="border" Property="Background" Value="#FFE6D9F9"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#FFD9CCF0"/>
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                            <Setter TargetName="border" Property="BorderThickness" Value="3"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
