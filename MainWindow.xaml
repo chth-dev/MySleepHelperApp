@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:MySleepHelperApp.Views"
         mc:Ignorable="d"
         Title="Sleep Helper" 
         Width="600"
@@ -12,267 +13,103 @@
         WindowStyle="None"
         Style="{StaticResource MainWindowStyle}">
 
-    <!-- Основной контейнер -->
+    <Window.Resources>
+        <!-- Подключаем словарь с иконками -->
+        <ResourceDictionary Source="Styles/Icons.xaml"/>
+    </Window.Resources>
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <!-- 0: Панель управления -->
-            <RowDefinition Height="Auto"/>
-            <!-- 1: Вкладки -->
-            <RowDefinition Height="Auto" MinHeight="71"/>
-            <!-- 2: Заголовок -->
-            <RowDefinition/>
-            <!-- 3: Основное содержимое -->
-            <RowDefinition Height="Auto"/>
-            <!-- 4: Кнопки -->
-        </Grid.RowDefinitions>
+        <!-- Фон окна с градиентом -->
+        <Border Background="{StaticResource WindowBackground}"/>
 
-        <!-- Верхняя панель с кнопками -->
-        <Border Grid.Row="0" 
-            Style="{StaticResource TopPanelStyle}"
-            MouseLeftButtonDown="TopPanel_MouseLeftButtonDown"
-            MouseMove="TopPanel_MouseMove"
-            MouseLeftButtonUp="TopPanel_MouseLeftButtonUp">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+        <!-- Основной контейнер -->
+        <DockPanel>
+            <!-- 1. Верхняя панель с кнопками -->
+            <Border DockPanel.Dock="Top"
+                    Style="{StaticResource TopPanelStyle}"
+                    MouseLeftButtonDown="TopPanel_MouseLeftButtonDown"
+                    MouseMove="TopPanel_MouseMove"
+                    MouseLeftButtonUp="TopPanel_MouseLeftButtonUp">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Sleep Helper" 
-                           Style="{StaticResource HeaderTextStyle}"
-                           FontSize="16"
-                           Margin="15,0"
-                           VerticalAlignment="Center" 
-                           HorizontalAlignment="Left" 
-                           FontFamily="Epilepsy Sans"/>
+                    <TextBlock Text="Sleep Helper" 
+                               Style="{StaticResource HeaderTextStyle}"
+                               FontSize="16"
+                               Margin="15,0"
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Left"/>
 
-                <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <Button x:Name="MinimizeButton"
-                            Style="{StaticResource WindowControlButton}"
-                            Content="_" 
-                            ToolTip="Свернуть"
-                            Click="MinimizeButton_Click"/>
-                    <Button x:Name="CloseButton"
-                            Style="{StaticResource WindowControlButton}"
-                            Content="✕" 
-                            ToolTip="Закрыть"
-                            Click="CloseButton_Click"/>
-                </StackPanel>
-            </Grid>
-        </Border>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button x:Name="MinimizeButton"
+                                Style="{StaticResource WindowControlButton}"
+                                Content="_" 
+                                ToolTip="Свернуть"
+                                Click="MinimizeButton_Click"/>
+                        <Button x:Name="CloseButton"
+                                Style="{StaticResource WindowControlButton}"
+                                Content="✕" 
+                                ToolTip="Закрыть"
+                                Click="CloseButton_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
 
-        <!-- Панель вкладок -->
-        <Border Grid.Row="1" Style="{StaticResource TabsContainerStyle}">
-            <UniformGrid Rows="1" HorizontalAlignment="Stretch">
-                <!-- Вкладка "Домой" -->
-                <RadioButton x:Name="HomeTab" 
-                     Style="{StaticResource TabButtonStyle}" 
-                     Content="Домой" 
-                     GroupName="Tabs" 
-                     IsChecked="True"
-                     Tag="{StaticResource HomeIcon}"/>
+            <!-- 2. Панель вкладок -->
+            <Border DockPanel.Dock="Top" 
+                    Style="{StaticResource TabsContainerStyle}">
+                <UniformGrid Rows="1" HorizontalAlignment="Stretch">
+                    <!-- Вкладка "Домой" -->
+                    <RadioButton x:Name="HomeTab" 
+                         Style="{StaticResource TabButtonStyle}" 
+                         Content="Домой" 
+                         GroupName="Tabs" 
+                         IsChecked="True"
+                         Tag="{StaticResource HomeIcon}"/>
 
-                <!-- Вкладка "Таймер" -->
-                <RadioButton x:Name="ShutdownTab" 
-                     Style="{StaticResource TabButtonStyle}" 
-                     Content="Таймер" 
-                     GroupName="Tabs"
-                     Tag="{StaticResource TimerIcon}"/>
+                    <!-- Вкладка "Таймер" -->
+                    <RadioButton x:Name="ShutdownTab" 
+                         Style="{StaticResource TabButtonStyle}" 
+                         Content="Таймер" 
+                         GroupName="Tabs"
+                         Tag="{StaticResource TimerIcon}"/>
 
-                <!-- Вкладка "Яркость" -->
-                <RadioButton x:Name="BrightnessTab" 
-                     Style="{StaticResource TabButtonStyle}" 
-                     Content="Яркость" 
-                     GroupName="Tabs"
-                     Tag="{StaticResource BrightnessIcon}"/>
+                    <!-- Вкладка "Яркость" -->
+                    <RadioButton x:Name="BrightnessTab" 
+                         Style="{StaticResource TabButtonStyle}" 
+                         Content="Яркость" 
+                         GroupName="Tabs"
+                         Tag="{StaticResource BrightnessIcon}"/>
 
-                <!-- Вкладка "Клавиатура" -->
-                <RadioButton x:Name="KeyboardTab" 
-                     Style="{StaticResource TabButtonStyle}" 
-                     Content="Клавиатура" 
-                     GroupName="Tabs"
-                     Tag="{StaticResource KeyboardIcon}"/>
+                    <!-- Вкладка "Клавиатура" -->
+                    <RadioButton x:Name="KeyboardTab" 
+                         Style="{StaticResource TabButtonStyle}" 
+                         Content="Клавиатура" 
+                         GroupName="Tabs"
+                         Tag="{StaticResource KeyboardIcon}"/>
 
-                <!-- Вкладка "Справка" -->
-                <RadioButton x:Name="HelpTab" 
-                     Style="{StaticResource TabButtonStyle}" 
-                     Content="Справка" 
-                     GroupName="Tabs"
-                     Tag="{StaticResource HelpIcon}"/>
-            </UniformGrid>
-        </Border>
+                    <!-- Вкладка "Справка" -->
+                    <RadioButton x:Name="HelpTab" 
+                         Style="{StaticResource TabButtonStyle}" 
+                         Content="Справка" 
+                         GroupName="Tabs"
+                         Tag="{StaticResource HelpIcon}"/>
+                </UniformGrid>
+            </Border>
 
-        <!-- Заголовок -->
-        <TextBlock Grid.Row="2"
-                   Text="Настройка таймера выключения"
-                   Style="{StaticResource HeaderTextStyle}"
-                   FontSize="26" 
-                   Margin="0,28,0,0" VerticalAlignment="Top" Height="26" Width="396"/>
-
-        <!-- Контент вкладок -->
-        <ContentControl Grid.Row="3" x:Name="TabContent"
+            <!-- 3. Контент вкладок -->
+            <ContentControl 
+                x:Name="TabContent"
                 HorizontalContentAlignment="Stretch"
-                VerticalContentAlignment="Stretch">
-            <ContentControl.Resources>
-                <Style TargetType="ContentPresenter">
-                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                    <Setter Property="VerticalAlignment" Value="Stretch"/>
-                </Style>
-            </ContentControl.Resources>
-        </ContentControl>
+                VerticalContentAlignment="Stretch"/>
+        </DockPanel>
 
-        <!-- Центральная панель с полями ввода -->
-        <Grid Grid.Row="3" VerticalAlignment="Top" Margin="0,19,0,0" Height="95">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <StackPanel x:Name="InputPanel" Grid.Column="1" Orientation="Horizontal">
-                <!-- Часы -->
-                <StackPanel Margin="10">
-                    <TextBlock Text="Часы" 
-                               Style="{StaticResource HeaderTextStyle}"
-                               FontSize="20" 
-                               Margin="0,0,0,5"/>
-                    <Grid Width="70" Height="50">
-                        <TextBox x:Name="HoursTextBox"
-                                 Style="{StaticResource TimeInputTextBox}"
-                                 PreviewTextInput="TextBox_PreviewTextInput"
-                                 PreviewKeyDown="TextBox_PreviewKeyDown"
-                                 GotFocus="TextBox_GotFocus"
-                                 LostFocus="TextBox_LostFocus"/>
-                        <TextBlock x:Name="HoursTextBoxPlaceholder"
-                                   Text="00"
-                                   FontSize="26"
-                                   Opacity="0.4"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   IsHitTestVisible="False" 
-                                   FontWeight="Bold" 
-                                   FontFamily="Epilepsy Sans"/>
-                    </Grid>
-                </StackPanel>
-
-                <!-- Минуты -->
-                <StackPanel Margin="10" VerticalAlignment="Center">
-                    <TextBlock Text="Минуты"
-                               Style="{StaticResource HeaderTextStyle}"
-                               FontSize="20" 
-                               Margin="0,0,0,5"/>
-                    <Grid Width="70" Height="50">
-                        <TextBox x:Name="MinutesTextBox"
-                                 Style="{StaticResource TimeInputTextBox}"
-                                 PreviewTextInput="TextBox_PreviewTextInput"
-                                 PreviewKeyDown="TextBox_PreviewKeyDown"
-                                 GotFocus="TextBox_GotFocus"
-                                 LostFocus="TextBox_LostFocus"/>
-                        <TextBlock x:Name="MinutesTextBoxPlaceholder"
-                                   Text="00"
-                                   FontSize="26"
-                                   Opacity="0.4"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   IsHitTestVisible="False" 
-                                   FontWeight="Bold" 
-                                   FontFamily="Epilepsy Sans"/>
-                    </Grid>
-                </StackPanel>
-
-                <!-- Секунды -->
-                <StackPanel Margin="10" VerticalAlignment="Center">
-                    <TextBlock Text="Секунды" 
-                               Style="{StaticResource HeaderTextStyle}"
-                               FontSize="20" 
-                               Margin="0,0,0,5"/>
-                    <Grid Width="70" Height="50">
-                        <TextBox x:Name="SecondsTextBox"
-                                 Style="{StaticResource TimeInputTextBox}"
-                                 PreviewTextInput="TextBox_PreviewTextInput"
-                                 PreviewKeyDown="TextBox_PreviewKeyDown"
-                                 GotFocus="TextBox_GotFocus"
-                                 LostFocus="TextBox_LostFocus"/>
-                        <TextBlock x:Name="SecondsTextBoxPlaceholder"
-                                   Text="00"
-                                   FontSize="26"
-                                   Opacity="0.4"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   IsHitTestVisible="False" 
-                                   FontWeight="Bold" 
-                                   FontFamily="Epilepsy Sans"/>
-                    </Grid>
-                </StackPanel>
-            </StackPanel>
-        </Grid>
-
-        <!-- Кнопки -->
-        <Grid Grid.Row="4" HorizontalAlignment="Right" Margin="0,0,15,20">
-            <!-- Кнопка "Запланировать" (видна по умолчанию) -->
-            <Button x:Name="ScheduleButton"
-            Style="{StaticResource PrimaryButton}"
-            Height="60" 
-            Width="240"
-            FontSize="18"
-            Padding="10"
-            Click="ScheduleShutdown_Click"
-            Visibility="Visible">
-                <!-- По умолчанию видна -->
-                <TextBlock Text="Запланировать выключение компьютера" 
-                   TextWrapping="Wrap" 
-                   TextAlignment="Center" 
-                   FontSize="18" 
-                   FontFamily="Epilepsy Sans"/>
-            </Button>
-
-            <!-- Кнопка "Отменить" (изначально скрыта) -->
-            <Button x:Name="CancelButton"
-            Style="{StaticResource PrimaryButton}"
-            Height="60" 
-            Width="240"
-            FontSize="18"
-            Padding="10"
-            Click="CancelButton_Click"
-            Visibility="Collapsed">
-                <!-- Изначально скрыта -->
-                <TextBlock Text="Отменить выключение компьютера" 
-                   TextWrapping="Wrap" 
-                   TextAlignment="Center" 
-                   FontSize="18" 
-                   FontFamily="Epilepsy Sans"/>
-            </Button>
-        </Grid>
-
-        <!-- Таймер -->
-        <Grid x:Name="TimerPanel" 
-              Visibility="Collapsed"
-              Grid.Row="3" 
-              HorizontalAlignment="Center"
-              VerticalAlignment="Top" Height="100" Width="300" Margin="0,28,0,0">
-            <TextBlock x:Name="CountdownText"
-                       Style="{StaticResource HeaderTextStyle}"
-                       FontSize="70"
-                       Text="00:00:00" VerticalAlignment="Top"/>
-        </Grid>
-
-        <!-- Изображение в левом нижнем углу -->
-        <Image Source="{StaticResource ShutdownImage}"
-       Width="263"
-       Height="264"
-       HorizontalAlignment="Left"
-       VerticalAlignment="Top"
-       Margin="41,76,0,0" Grid.Row="3" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="7.561"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-
+        <!-- Декоративная рамка -->
+        <Border BorderBrush="{StaticResource BorderGradient}"
+                BorderThickness="1"
+                CornerRadius="5"/>
     </Grid>
 </Window>

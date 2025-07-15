@@ -120,25 +120,25 @@
         <Setter Property="MaxLength" Value="2"/>
         <Setter Property="FontFamily" Value="Epilepsy Sans"/>
         <!-- Цвет рамки при фокусе -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border x:Name="border"
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="2">
-                            <ScrollViewer x:Name="PART_ContentHost"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsFocused" Value="True">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BorderGradient}"/>
-                                <Setter TargetName="border" Property="BorderThickness" Value="3"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+                            <Setter TargetName="border" Property="BorderThickness" Value="3"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- 9. СТИЛЬ ЗАГОЛОВКОВ -->
@@ -209,4 +209,14 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!-- 12. Основной стиль для всех UserControl -->
+    <Style x:Key="BaseUserControlStyle" TargetType="UserControl">
+        <!-- Наследуем цветовую схему главного окна -->
+        <Setter Property="Background" Value="{StaticResource WindowBackground}"/>
+        <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="FontFamily" Value="Epilepsy Sans"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderGradient}"/>
+    </Style>
+
 </ResourceDictionary>

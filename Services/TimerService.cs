@@ -47,7 +47,7 @@ namespace MySleepHelperApp.Services
             }
         }
 
-        //..............................Дополнительные методы (Start, Stop и т.д.)
+        //..............................Дополнительные методы 
         public void Start(int totalSeconds)
         {
             _remainingSeconds = totalSeconds;
@@ -69,5 +69,6 @@ namespace MySleepHelperApp.Services
             // Вызываем событие для обновления UI
             TimerUpdated?.Invoke(formattedTime);
         }
+
     }
 }
