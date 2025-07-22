@@ -4,13 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600"
-             Style="{StaticResource BaseUserControlStyle}">
-    
+             Background="Transparent">
+
     <Grid>
-        <TextBlock Text="Домашняя страница будет здесь" 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Заголовок -->
+            <RowDefinition Height="*"/>
+            <!-- Основное содержимое -->
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock x:Name="WelcomeText" 
+                   Grid.Row="0"
                    Style="{StaticResource HeaderTextStyle}"
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"/>
+                   FontSize="26"
+                   Margin="20,40,20,0"
+                   HorizontalAlignment="Center"/>
+
+        <!-- Область с изображением -->
+        <Border Grid.Row="1">
+            <Image x:Name="HomeImage" 
+                   Source="{StaticResource HomeImage}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="50"/>
+        </Border>
     </Grid>
 </UserControl>

@@ -4,12 +4,152 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600"
-             Style="{StaticResource BaseUserControlStyle}">
+             Background="Transparent">
     <Grid>
-        <TextBlock Text="Справка будет здесь" 
+        <!-- Главная сетка: 3 строки, 2 столбца -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Заголовок -->
+            <RowDefinition Height="Auto"/> <!-- Строка с таймером и клавиатурой -->
+            <RowDefinition Height="Auto"/> <!-- Строка с яркостью и картинкой -->
+            <RowDefinition Height="Auto"/> 
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/> <!-- Левый столбец -->
+            <ColumnDefinition Width="*"/> <!-- Правый столбец -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Заголовок (занимает оба столбца) -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+                   Text="Возможности My Sleep Helper"
                    Style="{StaticResource HeaderTextStyle}"
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"/>
+                   FontSize="26"
+                   Margin="20,40,20,0"
+                   HorizontalAlignment="Center"/>
+
+        <!-- Блок 1: Таймер выключения (левый столбец, строка 1) -->
+        <Border 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            Margin="14,17,7,7" 
+            Padding="7" 
+            Style="{StaticResource HelpBorderBoxStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/> <!-- Иконка + название -->
+                    <RowDefinition Height="Auto"/> <!-- Описание -->
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/> <!-- Иконка -->
+                    <ColumnDefinition Width="*"/> <!-- Текст -->
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Row="0" 
+                       Grid.Column="0"
+                       Source="{StaticResource TimerIcon}"
+                       Width="32" 
+                       Height="32" 
+                       Margin="0,0,10,0"/>
+
+                <TextBlock Grid.Row="0" 
+                           Grid.Column="1"
+                           Text="Таймер выключения" 
+                           Style="{StaticResource HeaderTextStyle}"
+                           FontSize="20"/>
+
+                <TextBlock Grid.Row="1" 
+                           Grid.Column="0" 
+                           Grid.ColumnSpan="2"
+                           Text="Автоматическое выключение компьютера через указанное время. Максимум - 23 часа, 59 минут, 59 секунд." 
+                           FontSize="18" 
+                           Margin="0,10,0,0"
+                           TextWrapping="Wrap"
+                           Width="240"
+                           Style="{StaticResource HelpTextBoxStyle}"/>
+            </Grid>
+        </Border>
+
+        <!-- Блок 2: Регулировка яркости -->
+        <Border 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            Margin="7,17,14,7" 
+            Padding="7" 
+            Style="{StaticResource HelpBorderBoxStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Row="0" Grid.Column="0"
+                       Source="{StaticResource BrightnessIcon}"
+                       Width="32" Height="32" Margin="0,0,10,0"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="1"
+                           Text="Регулировка яркости" 
+                           Style="{StaticResource HeaderTextStyle}"
+                           FontSize="20"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                           Text="Уменьшение яркости экрана монитора для комфортного засыпания." 
+                           FontSize="18" Margin="0,10,0,0"
+                           TextWrapping="Wrap"
+                           Width="240"
+                           Style="{StaticResource HelpTextBoxStyle}"/>
+            </Grid>
+        </Border>
+
+        <!-- Блок 3: Блокировка клавиатуры -->
+        <Border 
+            Grid.Row="2" 
+            Grid.Column="0" 
+            Margin="14,7,7,7" 
+            Padding="7" 
+            Style="{StaticResource HelpBorderBoxStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Row="0" Grid.Column="0"
+                       Source="{StaticResource KeyboardIcon}"
+                       Width="32" Height="32" Margin="0,0,10,0"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="1"
+                           Text="Блокировка клавиатуры" 
+                           Style="{StaticResource HeaderTextStyle}"
+                           FontSize="18"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                           Text="Отключение клавиатуры для защиты от случайных нажатий. Например, котиками." 
+                           FontSize="18" Margin="0,10,0,0"
+                           TextWrapping="Wrap"
+                           Width="240"
+                           Style="{StaticResource HelpTextBoxStyle}"/>
+            </Grid>
+        </Border>
+
+
+        <!-- Картинка (правый столбец, строка 2) -->
+        <Image Grid.Row="2" Grid.RowSpan="3" Grid.Column="1"
+               Source="{StaticResource HelpImage}"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Margin="10,0,0,5"
+               Width="100"/>
+
     </Grid>
 </UserControl>

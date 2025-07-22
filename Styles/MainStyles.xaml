@@ -219,4 +219,21 @@
         <Setter Property="BorderBrush" Value="{StaticResource BorderGradient}"/>
     </Style>
 
+    <!-- 13. Cтиль для плашек с подсказками -->
+    <Style x:Key="HelpBorderBoxStyle" TargetType="Border">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderGradient}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="2"/>
+        <Setter Property="Margin" Value="10,10,10,0"/>
+    </Style>
+
+    <!-- 14. Стиль текста в блоках справки -->
+    <Style x:Key="HelpTextBoxStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Epilepsy Sans"/>
+        <Setter Property="Foreground" Value="{StaticResource MediumPurple}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
 </ResourceDictionary>

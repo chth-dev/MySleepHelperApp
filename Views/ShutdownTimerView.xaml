@@ -4,58 +4,50 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             Width="600"
-             Height="450"
              Background="Transparent">
 
-    <!-- Полноразмерный Grid (600x450) -->
+
     <Grid>
-        <!-- Видимая область (совпадает с "вырезом" в MainWindow) -->
-        <Border Margin="10,80,10,10" 
-                Background="{StaticResource WindowBackground}"
-                CornerRadius="5">
-
-            <!-- Основной контейнер содержимого -->
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <!-- Заголовок -->
-                    <RowDefinition Height="*"/>
-                    <!-- Основное содержимое -->
-                    <RowDefinition Height="Auto"/>
-                    <!-- Кнопки -->
-                </Grid.RowDefinitions>
-
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <!-- Заголовок -->
-                <TextBlock Grid.Row="0"
+                <RowDefinition Height="*"/>
+                <!-- Основное содержимое -->
+                <RowDefinition Height="Auto"/>
+                <!-- Кнопки -->
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок -->
+            <TextBlock Grid.Row="0"
                            Text="Настройка таймера выключения"
                            Style="{StaticResource HeaderTextStyle}"
                            FontSize="26"
-                           Margin="0,20"
+                           Margin="20,40,20,0"
                            HorizontalAlignment="Center"/>
 
-                <!-- Центральная область -->
-                <Grid Grid.Row="1">
-                    <!-- Панель ввода времени -->
-                    <StackPanel x:Name="InputPanel" 
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Orientation="Horizontal">
-
-                        <!-- Часы -->
-                        <StackPanel Margin="10">
-                            <TextBlock Text="Часы" 
+            <!-- Центральная область -->
+            <Border 
+                x:Name="InputPanel"
+                Grid.Row="1"
+                CornerRadius="8"
+                Padding="5"
+                Margin="120,30,120,50">
+                <UniformGrid  Columns="3" VerticalAlignment="Center">
+                    <!-- Часы -->
+                    <StackPanel Margin="2">
+                        <TextBlock Text="Часы" 
                                        Style="{StaticResource HeaderTextStyle}"
                                        FontSize="20" 
                                        Margin="0,0,0,5"/>
-                            <Grid Width="70" Height="50">
-                                <TextBox x:Name="HoursTextBox"
+                        <Grid Width="80" Height="60">
+                            <TextBox x:Name="HoursTextBox"
                                          Style="{StaticResource TimeInputTextBox}"
                                          PreviewTextInput="TextBox_PreviewTextInput"
                                          PreviewKeyDown="TextBox_PreviewKeyDown"
                                          GotFocus="TextBox_GotFocus"
                                          LostFocus="TextBox_LostFocus"/>
-                                <TextBlock x:Name="HoursTextBoxPlaceholder"
+                            <TextBlock x:Name="HoursTextBoxPlaceholder"
                                            Text="00"
                                            FontSize="26"
                                            Opacity="0.4"
@@ -64,103 +56,93 @@
                                            IsHitTestVisible="False" 
                                            FontWeight="Bold" 
                                            FontFamily="Epilepsy Sans"/>
-                            </Grid>
-                        </StackPanel>
-
-                        <!-- Минуты -->
-                        <StackPanel Margin="10">
-                            <TextBlock Text="Минуты"
-                                       Style="{StaticResource HeaderTextStyle}"
-                                       FontSize="20" 
-                                       Margin="0,0,0,5"/>
-                            <Grid Width="70" Height="50">
-                                <TextBox x:Name="MinutesTextBox"
-                                         Style="{StaticResource TimeInputTextBox}"
-                                         PreviewTextInput="TextBox_PreviewTextInput"
-                                         PreviewKeyDown="TextBox_PreviewKeyDown"
-                                         GotFocus="TextBox_GotFocus"
-                                         LostFocus="TextBox_LostFocus"/>
-                                <TextBlock x:Name="MinutesTextBoxPlaceholder"
-                                           Text="00"
-                                           FontSize="26"
-                                           Opacity="0.4"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           IsHitTestVisible="False" 
-                                           FontWeight="Bold" 
-                                           FontFamily="Epilepsy Sans"/>
-                            </Grid>
-                        </StackPanel>
-
-                        <!-- Секунды -->
-                        <StackPanel Margin="10">
-                            <TextBlock Text="Секунды" 
-                                       Style="{StaticResource HeaderTextStyle}"
-                                       FontSize="20" 
-                                       Margin="0,0,0,5"/>
-                            <Grid Width="70" Height="50">
-                                <TextBox x:Name="SecondsTextBox"
-                                         Style="{StaticResource TimeInputTextBox}"
-                                         PreviewTextInput="TextBox_PreviewTextInput"
-                                         PreviewKeyDown="TextBox_PreviewKeyDown"
-                                         GotFocus="TextBox_GotFocus"
-                                         LostFocus="TextBox_LostFocus"/>
-                                <TextBlock x:Name="SecondsTextBoxPlaceholder"
-                                           Text="00"
-                                           FontSize="26"
-                                           Opacity="0.4"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           IsHitTestVisible="False" 
-                                           FontWeight="Bold" 
-                                           FontFamily="Epilepsy Sans"/>
-                            </Grid>
-                        </StackPanel>
+                        </Grid>
                     </StackPanel>
 
-                    <!-- Таймер (скрыт по умолчанию) -->
-                    <Grid x:Name="TimerPanel" 
-                          Visibility="Collapsed"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center">
-                        <TextBlock x:Name="CountdownText"
-                                   Style="{StaticResource HeaderTextStyle}"
-                                   FontSize="70"
-                                   Text="00:00:00"/>
-                    </Grid>
+                    <!-- Минуты -->
+                    <StackPanel Margin="2">
+                        <TextBlock Text="Минуты"
+                                       Style="{StaticResource HeaderTextStyle}"
+                                       FontSize="20" 
+                                       Margin="0,0,0,5"/>
+                        <Grid Width="80" Height="60">
+                            <TextBox x:Name="MinutesTextBox"
+                                         Style="{StaticResource TimeInputTextBox}"
+                                         PreviewTextInput="TextBox_PreviewTextInput"
+                                         PreviewKeyDown="TextBox_PreviewKeyDown"
+                                         GotFocus="TextBox_GotFocus"
+                                         LostFocus="TextBox_LostFocus"/>
+                            <TextBlock x:Name="MinutesTextBoxPlaceholder"
+                                           Text="00"
+                                           FontSize="26"
+                                           Opacity="0.4"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           IsHitTestVisible="False" 
+                                           FontWeight="Bold" 
+                                           FontFamily="Epilepsy Sans"/>
+                        </Grid>
+                    </StackPanel>
 
-                    <!-- Изображение кота -->
-                    <Image Source="{StaticResource ShutdownImage}"
-                           Width="200"
-                           Height="200"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Bottom"
-                           Margin="35,0,0,-131"
-                           RenderTransformOrigin="0.5,0.5">
-                        <Image.RenderTransform>
-                            <RotateTransform Angle="7.561"/>
-                        </Image.RenderTransform>
-                    </Image>
-                </Grid>
+                    <!-- Секунды -->
+                    <StackPanel Margin="2">
+                        <TextBlock Text="Секунды" 
+                                       Style="{StaticResource HeaderTextStyle}"
+                                       FontSize="20" 
+                                       Margin="0,0,0,5"/>
+                        <Grid Width="80" Height="60">
+                            <TextBox x:Name="SecondsTextBox"
+                                         Style="{StaticResource TimeInputTextBox}"
+                                         PreviewTextInput="TextBox_PreviewTextInput"
+                                         PreviewKeyDown="TextBox_PreviewKeyDown"
+                                         GotFocus="TextBox_GotFocus"
+                                         LostFocus="TextBox_LostFocus"/>
+                            <TextBlock x:Name="SecondsTextBoxPlaceholder"
+                                           Text="00"
+                                           FontSize="26"
+                                           Opacity="0.4"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           IsHitTestVisible="False" 
+                                           FontWeight="Bold" 
+                                           FontFamily="Epilepsy Sans"/>
+                        </Grid>
+                    </StackPanel>
+                </UniformGrid>
+            </Border>
 
-                <!-- Кнопки -->
-                <StackPanel Grid.Row="2"
+            <!-- Таймер (скрыт по умолчанию) -->
+            <Border 
+                x:Name="TimerPanel" 
+                Grid.Row="1"
+                CornerRadius="8"
+                Padding="5"
+                Margin="120,30,120,50"
+                Visibility="Collapsed">
+                <TextBlock x:Name="CountdownText"
+               Style="{StaticResource HeaderTextStyle}"
+               FontSize="70"
+               Text="00:00:00"/>
+            </Border>
+
+            <!-- Кнопки -->
+            <StackPanel Grid.Row="2"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
-                            Margin="20">
-                    <Button x:Name="ScheduleButton"
+                            Margin="20,20">
+                <Button x:Name="ScheduleButton"
                             Style="{StaticResource PrimaryButton}"
                             Height="60" 
                             Width="240"
                             FontSize="18"
                             Padding="10"
                             Click="ScheduleShutdown_Click">
-                        <TextBlock Text="Запланировать выключение компьютера" 
+                    <TextBlock Text="Запланировать выключение компьютера" 
                                    TextWrapping="Wrap" 
                                    TextAlignment="Center" FontFamily="Epilepsy Sans"/>
-                    </Button>
+                </Button>
 
-                    <Button x:Name="CancelButton"
+                <Button x:Name="CancelButton"
                             Style="{StaticResource PrimaryButton}"
                             Height="60" 
                             Width="240"
@@ -169,12 +151,20 @@
                             Click="CancelButton_Click"
                             Visibility="Collapsed"
                             Margin="0,10,0,0">
-                        <TextBlock Text="Отменить выключение компьютера" 
+                    <TextBlock Text="Отменить выключение компьютера" 
                                    TextWrapping="Wrap" 
                                    TextAlignment="Center" FontFamily="Epilepsy Sans"/>
-                    </Button>
-                </StackPanel>
-            </Grid>
-        </Border>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- Изображение -->
+        <Image 
+                           Source="{StaticResource ShutdownImage}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           Margin="20,0,0,20" Height="auto" Width="230">
+        </Image>
+
     </Grid>
 </UserControl>

@@ -234,5 +234,9 @@ namespace MySleepHelperApp.Views
             ResetUI();
         }
 
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

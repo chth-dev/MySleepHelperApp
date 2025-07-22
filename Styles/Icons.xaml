@@ -18,5 +18,11 @@
 
     <BitmapImage x:Key="ShutdownImage" 
              UriSource="pack://application:,,,/Styles/Assets/cat_timer.png"/>
-    
+
+    <BitmapImage x:Key="HomeImage" 
+             UriSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/cat_home.png"/>
+
+    <BitmapImage x:Key="HelpImage" 
+             UriSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/cat_help.png"/>
+
 </ResourceDictionary>
