@@ -7,15 +7,17 @@
         Background="Transparent"
         Topmost="True"
         ShowInTaskbar="False">
-    
+
     <!-- Основной прозрачный слой -->
     <Grid>
         <!-- Можно добавить подсказку (опционально) -->
-        <TextBlock Text="Нажмите Ctrl+K для разблокировки клавиатуры"
+        <TextBlock Text="Клавиатура заблокирована. Для разблокировки вернитесь в приложение My Sleep Helper."
                    Foreground="White"
                    Opacity="0.3"
                    HorizontalAlignment="Center"
+                   Style="{StaticResource HelpTextBoxStyle}"
                    VerticalAlignment="Bottom"
-                   Margin="0,0,0,50"/>
+                   Margin="5"
+                   FontSize="15"/>
     </Grid>
 </Window>

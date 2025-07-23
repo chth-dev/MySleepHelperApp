@@ -1,64 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using MySleepHelperApp.Services;
 
 namespace MySleepHelperApp
 {
     public partial class TransparentOverlay : Window
     {
-        // Конструктор
+        // Изменяем на nullable поле
+        private readonly KeyboardHook? _keyboardHook;
+
         public TransparentOverlay()
         {
             InitializeComponent();
             SetupOverlay();
+
+            try
+            {
+                _keyboardHook = new KeyboardHook();
+                _keyboardHook.Disposed += OnKeyboardHookDisposed;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка блокировки клавиатуры: {ex.Message}");
+                _keyboardHook = null; // Явное указание null
+                Close();
+            }
         }
 
-        // Настройка прозрачного окна
         private void SetupOverlay()
         {
-            // 1. Делаем окно невидимым для Windows (без рамок, кнопок и т.д.)
             WindowStyle = WindowStyle.None;
-
-            // 2. Разрешаем прозрачность (чтобы видеть контент под окном)
             AllowsTransparency = true;
-
-            // 3. Задаем почти прозрачный фон (1% непрозрачности)
-            Background = System.Windows.Media.Brushes.Transparent;
-
-            // 4. Окно всегда поверх других программ
+            Background = Brushes.Transparent;
             Topmost = true;
-
-            // 5. Не показываем в панели задач
             ShowInTaskbar = false;
-
-            // 6. Растягиваем на весь экран (автоматически работает для всех мониторов)
             Left = SystemParameters.VirtualScreenLeft;
             Top = SystemParameters.VirtualScreenTop;
             Width = SystemParameters.VirtualScreenWidth;
             Height = SystemParameters.VirtualScreenHeight;
         }
 
-        // Перехват нажатия клавиш
-        protected override void OnKeyDown(KeyEventArgs e)
+        private void OnKeyboardHookDisposed()
         {
-            // Разблокировка по Ctrl+K
-            if (e.Key == Key.K && Keyboard.Modifiers == ModifierKeys.Control)
-            {
-                Close(); // Закрываем это окно
-            }
+            Dispatcher.Invoke(Close);
+        }
 
-            // Блокируем все остальные клавиши
-            e.Handled = true;
+        protected override void OnClosed(EventArgs e)
+        {
+            if (_keyboardHook != null)
+            {
+                _keyboardHook.Disposed -= OnKeyboardHookDisposed; // Отписываемся от события
+                _keyboardHook.Dispose(); // Вызываем Dispose() напрямую
+            }
+            base.OnClosed(e);
         }
     }
 }

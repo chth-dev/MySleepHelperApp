@@ -15,6 +15,7 @@ namespace MySleepHelperApp
         public MainWindow()
         {
             InitializeComponent();
+            this.Closed += MainWindow_Closed; // Подписываемся на событие закрытия
 
             // Инициализация вкладок
             _shutdownTimerView = new ShutdownTimerView();
@@ -72,6 +73,15 @@ namespace MySleepHelperApp
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void MainWindow_Closed(object? sender, EventArgs e)
+        {
+            // Закрываем блокировщик
+            KeyboardLockView.CurrentBlocker?.Close();
+
+            // Освобождаем хук
+            _keyboardView?.ReleaseKeyboardHook();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
