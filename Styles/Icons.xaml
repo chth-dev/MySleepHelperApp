@@ -25,4 +25,7 @@
     <BitmapImage x:Key="HelpImage" 
              UriSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/cat_help.png"/>
 
+    <BitmapImage x:Key="KeyboardLockImage" 
+             UriSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/cat_keyboard.png"/>
+
 </ResourceDictionary>

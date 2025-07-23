@@ -1,0 +1,21 @@
+﻿<Window x:Class="MySleepHelperApp.TransparentOverlay"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="KeyboardBlocker" 
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        ShowInTaskbar="False">
+    
+    <!-- Основной прозрачный слой -->
+    <Grid>
+        <!-- Можно добавить подсказку (опционально) -->
+        <TextBlock Text="Нажмите Ctrl+K для разблокировки клавиатуры"
+                   Foreground="White"
+                   Opacity="0.3"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,0,50"/>
+    </Grid>
+</Window>

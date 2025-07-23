@@ -6,17 +6,32 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>iconsleephelper.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Styles\Assets\brightness_icon.png" />
     <None Remove="Styles\Assets\cat_help.png" />
     <None Remove="Styles\Assets\cat_home.png" />
+    <None Remove="Styles\Assets\cat_keyboard.png" />
     <None Remove="Styles\Assets\cat_timer.png" />
     <None Remove="Styles\Assets\help_icon.png" />
     <None Remove="Styles\Assets\home_icon.png" />
     <None Remove="Styles\Assets\keyboard_icon.png" />
     <None Remove="Styles\Assets\timer_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="{215d64d2-031c-33c7-96e3-61794cd1ee61}">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>215d64d2-031c-33c7-96e3-61794cd1ee61</Guid>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="iconsleephelper.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +42,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Styles\Assets\cat_home.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Styles\Assets\cat_keyboard.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Styles\Assets\cat_timer.png">

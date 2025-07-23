@@ -5,12 +5,84 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MySleepHelperApp.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600"
-             Style="{StaticResource BaseUserControlStyle}">
-    <Grid>
-        <TextBlock Text="Блокировка клавиатуры будет здесь" 
-                   Style="{StaticResource HeaderTextStyle}"
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"/>
+             Background="Transparent"
+             Unloaded="UserControl_Unloaded">
+    <Grid
+        Margin="30,60">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock 
+            Grid.Row="0" 
+            Grid.Column="0"
+            Text="Блокировка клавиатуры"
+            Style="{StaticResource HeaderTextStyle}"
+            FontSize="26"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"/>
+
+        <StackPanel 
+            Grid.Row="1" 
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="10">
+            <Button 
+                x:Name="KeyboardLockButton"
+                Style="{StaticResource PrimaryButton}"
+                Height="60" 
+                Width="240"
+                FontSize="18"
+                Padding="10"
+                Click="KeyboardLockButton_Click">
+                <TextBlock 
+                    Text="Заблокировать" 
+                    TextWrapping="Wrap" 
+                    TextAlignment="Center" 
+                    FontFamily="Epilepsy Sans"/>
+            </Button>
+        </StackPanel>
+
+        <StackPanel 
+                Grid.Row="1" 
+                Grid.Column="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="10"
+                Visibility="Collapsed">
+            <Button 
+                x:Name="KeyboardUnLockButton"
+                Style="{StaticResource PrimaryButton}"
+                Height="60" 
+                Width="240"
+                FontSize="18"
+                Padding="10"
+                Click="KeyboardUnLockButton_Click">
+                <TextBlock 
+                    Text="Разблокировать" 
+                    TextWrapping="Wrap" 
+                    TextAlignment="Center" 
+                    FontFamily="Epilepsy Sans"/>
+            </Button>
+        </StackPanel>
+
+        <Image 
+            Grid.Row="0" 
+            Grid.RowSpan="2" 
+            Grid.Column="1"
+            Source="{StaticResource KeyboardLockImage}"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="10"
+            Width="120"/>
+
     </Grid>
 </UserControl>
