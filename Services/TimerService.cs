@@ -32,6 +32,8 @@ namespace MySleepHelperApp.Services
             _timer.Tick += Timer_Tick; // Теперь безопасно
         }
 
+        public bool IsRunning { get; private set; }
+
         //..............................Обработчик тиков
         private void Timer_Tick(object? sender, EventArgs e)
         {
@@ -50,6 +52,7 @@ namespace MySleepHelperApp.Services
         //..............................Дополнительные методы 
         public void Start(int totalSeconds)
         {
+            IsRunning = true;
             _remainingSeconds = totalSeconds;
             UpdateTimerText();
             _timer.Start();
@@ -57,6 +60,7 @@ namespace MySleepHelperApp.Services
 
         public void Stop()
         {
+            IsRunning = false;
             _timer.Stop();
         }
 

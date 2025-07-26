@@ -10,6 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -27,10 +28,87 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"/>
 
-        <!-- Кнопка "Заблокировать" (изначально видима) -->
+        <Border 
+            x:Name="KeyboardActive"
+            Grid.Row="1" 
+            Grid.Column="0" 
+            Margin="5" 
+            Padding="5" 
+            Height="60" 
+            Width="292"
+            VerticalAlignment="Center"
+            Style="{StaticResource HelpBorderBoxStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image 
+                   x:Name="StatusIcon"
+                   Grid.Row="0" 
+                   Source="{StaticResource CheckmarkIcon}"
+                   Width="32" Height="32"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="10, 5"/>
+
+                <TextBlock 
+                   x:Name="StatusText"
+                   Grid.Column="1"
+                   Text="Сейчас клавиатура активна" 
+                   Style="{StaticResource HelpTextBoxStyle}"
+                   FontSize="20"
+                   TextWrapping="Wrap"
+                   Width="200" TextAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <Border 
+            x:Name="KeyboardLock"
+            Visibility="Collapsed"
+            Grid.Row="1" 
+            Grid.Column="0" 
+            Margin="5" 
+            Padding="5" 
+            Height="60" 
+            Width="292"
+            VerticalAlignment="Center"
+            Style="{StaticResource HelpBorderBoxStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Row="0" 
+           Source="{StaticResource CrossIcon}"
+           Width="32" Height="32"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center"
+           Margin="10, 5"/>
+
+                <TextBlock Grid.Column="1"
+           Text="Сейчас клавиатура не активна" 
+           Style="{StaticResource HelpTextBoxStyle}"
+           FontSize="20"
+           TextWrapping="Wrap"
+           Width="200" TextAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- Кнопка -->
         <Button 
             x:Name="KeyboardLockButton"
-            Grid.Row="1" 
+            Grid.Row="2" 
             Grid.Column="0"
             Style="{StaticResource PrimaryButton}"
             Height="60" 
@@ -39,32 +117,11 @@
             Padding="10"
             Click="KeyboardLockButton_Click"
             HorizontalAlignment="Center"
-            VerticalAlignment="Top"
+            VerticalAlignment="Center"
             Margin="10">
             <TextBlock 
+                x:Name="ButtonText"
                 Text="Заблокировать" 
-                TextWrapping="Wrap" 
-                TextAlignment="Center" 
-                FontFamily="Epilepsy Sans"/>
-        </Button>
-
-        <!-- Кнопка "Разблокировать" (изначально скрыта) -->
-        <Button 
-            x:Name="KeyboardUnLockButton"
-            Grid.Row="1" 
-            Grid.Column="0"
-            Style="{StaticResource PrimaryButton}"
-            Height="60" 
-            Width="240"
-            FontSize="18"
-            Padding="10"
-            Click="KeyboardUnLockButton_Click"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Margin="10"
-            Visibility="Collapsed">
-            <TextBlock 
-                Text="Разблокировать" 
                 TextWrapping="Wrap" 
                 TextAlignment="Center" 
                 FontFamily="Epilepsy Sans"/>
@@ -72,7 +129,7 @@
 
         <Image 
             Grid.Row="0" 
-            Grid.RowSpan="2" 
+            Grid.RowSpan="3" 
             Grid.Column="1"
             Source="{StaticResource KeyboardLockImage}"
             HorizontalAlignment="Left"

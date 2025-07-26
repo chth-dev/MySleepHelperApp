@@ -30,13 +30,18 @@ namespace MySleepHelperApp.Views
             // Инициализация сервиса таймера
             _timerService = new TimerService();
 
-            // Подписка на события таймера:
+            // Подписка на события таймера
             _timerService.TimerUpdated += time => CountdownText.Text = time;
             _timerService.TimerFinished += () =>
             {
                 MessageBox.Show("Спокойной ночи.");
                 ResetUI();
+                _isTimerRunning = false;
+                UpdateButtonState();
             };
+
+            // Начальная настройка кнопки
+            UpdateButtonState();
         }
 
         //........................................... 1.Работа с интерфейсом
@@ -46,8 +51,6 @@ namespace MySleepHelperApp.Views
         {
             TimerPanel.Visibility = Visibility.Collapsed;
             InputPanel.Visibility = Visibility.Visible;
-            ScheduleButton.Visibility = Visibility.Visible;
-            CancelButton.Visibility = Visibility.Collapsed;
             CountdownText.Text = "00:00:00";
 
             // Сброс полей ввода
@@ -218,11 +221,8 @@ namespace MySleepHelperApp.Views
             SystemCommandService.ShutdownComputer(totalSeconds);
             _timerService.Start(totalSeconds); // Запускаем через сервис
 
-            // Переключение видимости элементов
-            TimerPanel.Visibility = Visibility.Visible;
-            InputPanel.Visibility = Visibility.Collapsed;
-            ScheduleButton.Visibility = Visibility.Collapsed;
-            CancelButton.Visibility = Visibility.Visible;
+            _isTimerRunning = true;  // Ставим флаг "таймер работает"
+            UpdateButtonState();     // Обновляем кнопку
         }
 
 
@@ -232,7 +232,36 @@ namespace MySleepHelperApp.Views
             _timerService.Stop();
             SystemCommandService.CancelShutdown();
             ResetUI();
+
+            _isTimerRunning = false; // Сбрасываем флаг
+            UpdateButtonState();     // Возвращаем кнопку в исходное состояние
         }
+
+        private bool _isTimerRunning = false; // Флаг состояния
+        private void UpdateButtonState()
+        {
+            if (_isTimerRunning)
+            {
+                // Если таймер работает, показываем "Отменить" и вешаем обработчик отмены
+                ButtonText.Text = "Отменить выключение компьютера";
+                ScheduleButton.Click -= ScheduleShutdown_Click; // Удаляем старый обработчик
+                ScheduleButton.Click += CancelButton_Click;     // Добавляем новый
+                TimerPanel.Visibility = Visibility.Visible;
+                InputPanel.Visibility = Visibility.Collapsed;
+
+            }
+            else
+            {
+                // Если таймер не работает, показываем "Запланировать" и вешаем обработчик запуска
+                ButtonText.Text = "Запланировать выключение компьютера";
+                ScheduleButton.Click -= CancelButton_Click;     // Удаляем старый обработчик
+                ScheduleButton.Click += ScheduleShutdown_Click; // Добавляем новый
+                TimerPanel.Visibility = Visibility.Collapsed;
+                InputPanel.Visibility = Visibility.Visible;
+            }
+        }
+
+        public bool IsTimerActive => _timerService?.IsRunning ?? false;
 
     }
 }

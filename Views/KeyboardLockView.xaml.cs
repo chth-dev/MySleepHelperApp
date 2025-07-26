@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using MySleepHelperApp.Services;
 
 namespace MySleepHelperApp.Views
@@ -24,7 +25,7 @@ namespace MySleepHelperApp.Views
         {
             _keyboardHook?.Dispose();
             _keyboardHook = null;
-            _isLockActive = false;
+            _isBlockRunning = false;
         }
 
         private void KeyboardLockButton_Click(object sender, RoutedEventArgs e)
@@ -64,15 +65,51 @@ namespace MySleepHelperApp.Views
             _currentBlocker?.Close();
         }
 
-        private void UpdateUI(bool locked)
+        private void UpdateUI(bool isLocked)
         {
-            KeyboardUnLockButton.Visibility = locked ? Visibility.Visible : Visibility.Collapsed;
-            KeyboardLockButton.Visibility = locked ? Visibility.Collapsed : Visibility.Visible;
+            _isBlockRunning = isLocked; // Обновляем флаг
+
+            // 1. Обновляем кнопку
+            UpdateButtonState();
+
+            // 2. Обновляем плашку
+            UpdateStatusPanel(isLocked);
         }
 
         private void ResetUI()
         {
             UpdateUI(false);
         }
+
+        private bool _isBlockRunning = false; // Флаг состояния
+        private void UpdateButtonState()
+        {
+            if (_isBlockRunning)
+            {
+                // Если блокировка работает, показываем "разблокировать" и вешаем обработчик разблокировки
+                ButtonText.Text = "Разблокировать";
+                KeyboardLockButton.Click -= KeyboardLockButton_Click; // Удаляем старый обработчик
+                KeyboardLockButton.Click += KeyboardUnLockButton_Click;     // Добавляем новый
+            }
+            else
+            {
+                // Если блокировка не работает, показываем "Заблокировать" и вешаем обработчик блокировки
+                ButtonText.Text = "Заблокировать";
+                KeyboardLockButton.Click -= KeyboardUnLockButton_Click;     // Удаляем старый обработчик
+                KeyboardLockButton.Click += KeyboardLockButton_Click; // Добавляем новый
+            }
+        }
+
+        private void UpdateStatusPanel(bool isLocked)
+        {
+            // Меняем иконку
+            StatusIcon.Source = (ImageSource)FindResource(isLocked ? "CrossIcon" : "CheckmarkIcon");
+
+            // Меняем текст
+            StatusText.Text = isLocked
+                ? "Сейчас клавиатура заблокирована"
+                : "Сейчас клавиатура активна";
+        }
+
     }
 }

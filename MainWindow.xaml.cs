@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using MySleepHelperApp.Views;
+using MySleepHelperApp.Services;
 
 namespace MySleepHelperApp
 {
@@ -77,15 +78,30 @@ namespace MySleepHelperApp
 
         private void MainWindow_Closed(object? sender, EventArgs e)
         {
-            // Закрываем блокировщик
+            // 1. Отменяем запланированное выключение компьютера
+            SystemCommandService.CancelShutdown();
+
+            // 2. Закрываем блокировщик клавиатуры
             KeyboardLockView.CurrentBlocker?.Close();
 
-            // Освобождаем хук
+            // 3. Освобождаем хук клавиатуры
             _keyboardView?.ReleaseKeyboardHook();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            if (AreCriticalFunctionsActive())
+            {
+                var result = MessageBox.Show(
+                    "Точно закрыть приложение?\nФункция блокировки клавиатуры и таймер выключения будут остановлены.",
+                    "Подтверждение закрытия",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.No)
+                    return;
+            }
+
             this.Close();
         }
 
@@ -112,6 +128,17 @@ namespace MySleepHelperApp
         {
             _isDragging = false;
             ((UIElement)sender).ReleaseMouseCapture();
+        }
+
+        private bool AreCriticalFunctionsActive()
+        {
+            // Проверяем активен ли таймер выключения
+            bool isShutdownTimerActive = _shutdownTimerView?.IsTimerActive ?? false;
+
+            // Проверяем активна ли блокировка клавиатуры
+            bool isKeyboardLockActive = _keyboardView?.IsKeyboardHookActive ?? false;
+
+            return isShutdownTimerActive || isKeyboardLockActive;
         }
     }
 }

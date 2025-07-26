@@ -109,7 +109,6 @@
 
         <!-- Декоративная рамка -->
         <Border BorderBrush="{StaticResource BorderGradient}"
-                BorderThickness="1"
-                CornerRadius="5"/>
+                BorderThickness="1"/>
     </Grid>
 </Window>

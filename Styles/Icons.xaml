@@ -28,4 +28,11 @@
     <BitmapImage x:Key="KeyboardLockImage" 
              UriSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/cat_keyboard.png"/>
 
+    <BitmapImage x:Key="CrossIcon" 
+                 UriSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/cross_icon.png"/>
+
+    <BitmapImage x:Key="CheckmarkIcon" 
+                 UriSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/checkmark_icon.png"/>
+    
+
 </ResourceDictionary>
