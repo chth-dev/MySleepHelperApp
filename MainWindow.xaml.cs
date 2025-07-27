@@ -92,17 +92,20 @@ namespace MySleepHelperApp
         {
             if (AreCriticalFunctionsActive())
             {
-                var result = MessageBox.Show(
-                    "Точно закрыть приложение?\nФункция блокировки клавиатуры и таймер выключения будут остановлены.",
-                    "Подтверждение закрытия",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Warning);
+                // Используем кастомный диалог
+                var result = CustomMessageBox.ShowYesNoDialog(
+                    "При закрытии приложения функция блокировки клавиатуры и таймер выключения будут остановлены. Всё равно закрыть?",
+                    "Предупреждение!");
 
-                if (result == MessageBoxResult.No)
+                if (result != true)
+                {
+                    // Пользователь нажал "Нет" или закрыл окно
                     return;
+                }
             }
 
-            this.Close();
+            // Если критические функции не активны или пользователь нажал "Да"
+            this.Close(); // Это вызовет MainWindow_Closed
         }
 
         private bool _isDragging = false;

@@ -4,9 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MySleepHelperApp.Views"
-             mc:Ignorable="d" 
-             Width="400"
-             Height="300">
+             mc:Ignorable="d">
     <Grid>
 
         <!-- Фон окна с градиентом -->
@@ -14,8 +12,61 @@
 
         <!-- Декоративная рамка -->
         <Border BorderBrush="{StaticResource BorderGradient}"
-                BorderThickness="4"
-/>
+                BorderThickness="4"/>
 
+        <Grid>
+            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+            <!-- Заголовок -->
+            <TextBlock 
+                   x:Name="TitleText" 
+                   Grid.Row="0"
+                   Style="{StaticResource HeaderTextStyle}"
+                   Text="Предупреждение!" 
+                   FontSize="26"
+                   Margin="10,20"/>
+
+            <!-- Сообщение -->
+            <TextBlock 
+                   x:Name="MessageText" 
+                   Grid.Row="1"
+                   Style="{StaticResource HelpTextBoxStyle}"
+                   TextWrapping="Wrap"
+                   Margin="10"
+                   FontSize="22"
+                   Text="Какой то текст, Какой то текст, Какой то текст!"/>
+
+            <ItemsControl 
+                x:Name="ButtonsContainer" 
+                Margin="10"
+                Grid.Row="2"
+                ItemsSource="{Binding Buttons}"
+                HorizontalAlignment="Center">
+                <!-- 1. Задаём горизонтальное расположение кнопок -->
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <!-- 2. Шаблон для каждой кнопки -->
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Text}" 
+                    Command="{Binding Command}"
+                    Style="{StaticResource PrimaryButton}"
+                    Margin="10"
+                    Padding="15"
+                    FontSize="20"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </Grid>
     </Grid>
 </UserControl>
