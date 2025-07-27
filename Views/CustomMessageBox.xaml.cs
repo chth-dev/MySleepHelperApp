@@ -59,11 +59,11 @@ namespace MySleepHelperApp.Views
                 Content = dialog,
                 Width = 400,                           // ← Точный размер ширины
                 Height = 300,                          // ← Точный размер высоты
-                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                WindowStartupLocation = owner != null ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen,
                 ResizeMode = ResizeMode.NoResize,      // Запрещаем изменение размера
                 WindowStyle = WindowStyle.None,        // Убираем стандартную рамку
                 Owner = owner,
-                Title = title
+                Title = title,
             };
 
             dialog.Buttons.Add(new MessageBoxButton
@@ -71,6 +71,8 @@ namespace MySleepHelperApp.Views
                 Text = "OK",
                 Command = new RelayCommand(_ => window.DialogResult = true)
             });
+
+            dialog.Show(message, title);
 
             return window.ShowDialog();
         }
@@ -83,7 +85,7 @@ namespace MySleepHelperApp.Views
                 Content = dialog,
                 Width = 400,                           // ← Точный размер ширины
                 Height = 300,                          // ← Точный размер высоты
-                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                WindowStartupLocation = owner != null ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen,
                 ResizeMode = ResizeMode.NoResize,      // Запрещаем изменение размера
                 WindowStyle = WindowStyle.None,        // Убираем стандартную рамку
                 Owner = owner,
@@ -149,6 +151,12 @@ namespace MySleepHelperApp.Views
             {
                 _execute = execute ?? throw new ArgumentNullException(nameof(execute));
                 _canExecute = canExecute;
+            }
+
+            public RelayCommand(Action execute)
+             : this(execute != null ? new Action<object?>(_ => execute()) : null!, null)
+            {
+                if (execute == null) throw new ArgumentNullException(nameof(execute));
             }
 
             public bool CanExecute(object? parameter)

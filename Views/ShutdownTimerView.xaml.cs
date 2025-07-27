@@ -214,7 +214,10 @@ namespace MySleepHelperApp.Views
             // Проверяем, чтобы время было больше нуля
             if (totalSeconds <= 0)
             {
-                MessageBox.Show("Введите время больше нуля.");
+                var result = CustomMessageBox.ShowDialog(
+                    "Пожалуйста, введите время больше нуля, иначе таймер выключения не сможет работать \n:(",
+                    "Предупреждение!"
+                    );
                 return;
             }
 

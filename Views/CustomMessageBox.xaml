@@ -17,7 +17,7 @@
         <Grid>
             
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -28,8 +28,9 @@
                    Grid.Row="0"
                    Style="{StaticResource HeaderTextStyle}"
                    Text="Предупреждение!" 
-                   FontSize="26"
-                   Margin="10,20"/>
+                   FontSize="28"
+                   Margin="5"
+                   VerticalAlignment="Bottom"/>
 
             <!-- Сообщение -->
             <TextBlock 
@@ -37,13 +38,13 @@
                    Grid.Row="1"
                    Style="{StaticResource HelpTextBoxStyle}"
                    TextWrapping="Wrap"
-                   Margin="10"
-                   FontSize="22"
+                   Margin="20,5"
+                   FontSize="26"
                    Text="Какой то текст, Какой то текст, Какой то текст!"/>
 
             <ItemsControl 
                 x:Name="ButtonsContainer" 
-                Margin="10"
+                Margin="10,5"
                 Grid.Row="2"
                 ItemsSource="{Binding Buttons}"
                 HorizontalAlignment="Center">
@@ -61,7 +62,6 @@
                     Command="{Binding Command}"
                     Style="{StaticResource PrimaryButton}"
                     Margin="10"
-                    Padding="15"
                     FontSize="20"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
