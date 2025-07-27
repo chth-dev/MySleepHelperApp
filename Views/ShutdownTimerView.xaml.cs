@@ -57,6 +57,8 @@ namespace MySleepHelperApp.Views
             HoursTextBox.Text = "00";
             MinutesTextBox.Text = "00";
             SecondsTextBox.Text = "00";
+
+            TitleText.Text = "Настройка таймера выключения";
         }
 
         //........................................... 2.Обработчики текстовых полей
@@ -251,6 +253,7 @@ namespace MySleepHelperApp.Views
                 ScheduleButton.Click += CancelButton_Click;     // Добавляем новый
                 TimerPanel.Visibility = Visibility.Visible;
                 InputPanel.Visibility = Visibility.Collapsed;
+                TitleText.Text = "Компьютер будет выключен через:";
 
             }
             else
@@ -261,6 +264,7 @@ namespace MySleepHelperApp.Views
                 ScheduleButton.Click += ScheduleShutdown_Click; // Добавляем новый
                 TimerPanel.Visibility = Visibility.Collapsed;
                 InputPanel.Visibility = Visibility.Visible;
+                TitleText.Text = "Настройка таймера выключения";
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +54,7 @@ namespace MySleepHelperApp.Views
 
         public static bool? ShowDialog(string message, string title, Window? owner = null)
         {
+            bool? result = null;
             var dialog = new CustomMessageBox();
             var window = new Window
             {
@@ -66,55 +68,67 @@ namespace MySleepHelperApp.Views
                 Title = title,
             };
 
-            dialog.Buttons.Add(new MessageBoxButton
+            // Создаем команду, которая устанавливает результат и закрывает окно
+            var command = new RelayCommand(() =>
             {
-                Text = "OK",
-                Command = new RelayCommand(_ => window.DialogResult = true)
+                result = true;
+                window.Close();
             });
 
-            dialog.Show(message, title);
+            var okButton = new MessageBoxButton
+            {
+                Text = "OK",
+                Command = command
+            };
 
-            return window.ShowDialog();
+            dialog.Show(message, title, new[] { okButton });
+
+            window.ShowDialog();
+            return result;
         }
 
         public static bool? ShowYesNoDialog(string message, string title, Window? owner = null)
         {
+            bool? result = null;
             var dialog = new CustomMessageBox();
             var window = new Window
             {
                 Content = dialog,
-                Width = 400,                           // ← Точный размер ширины
-                Height = 300,                          // ← Точный размер высоты
+                Width = 400,
+                Height = 300,
                 WindowStartupLocation = owner != null ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen,
-                ResizeMode = ResizeMode.NoResize,      // Запрещаем изменение размера
-                WindowStyle = WindowStyle.None,        // Убираем стандартную рамку
+                ResizeMode = ResizeMode.NoResize,
+                WindowStyle = WindowStyle.None,
                 Owner = owner,
                 Title = title
             };
 
             // Команда для кнопки "Да"
-            var yesCommand = new RelayCommand(_ =>
+            var yesCommand = new RelayCommand(() =>
             {
-                window.DialogResult = true;
+                result = true;
+                window.Close();
             });
 
             // Команда для кнопки "Нет"
-            var noCommand = new RelayCommand(_ =>
+            var noCommand = new RelayCommand(() =>
             {
-                window.DialogResult = false;
+                result = false;
+                window.Close();
             });
 
             // Подготавливаем массив кнопок
             var buttons = new[]
             {
-            new MessageBoxButton { Text = "Да", Command = yesCommand },
-            new MessageBoxButton { Text = "Нет", Command = noCommand }
+                new MessageBoxButton { Text = "Да", Command = yesCommand },
+                new MessageBoxButton { Text = "Нет", Command = noCommand }
             };
 
             // Передаём кнопки в метод Show
             dialog.Show(message, title, buttons);
 
-            return window.ShowDialog();
+            window.ShowDialog();
+            return result;
         }
 
         public static bool? ShowCustomDialog(
@@ -142,31 +156,32 @@ namespace MySleepHelperApp.Views
 
         public class RelayCommand : ICommand
         {
-            private readonly Action<object?> _execute;
-            private readonly Func<object?, bool>? _canExecute;
+            private readonly Action _execute;
+            private bool _canExecute = true;
 
-            public event EventHandler? CanExecuteChanged;  // Допускает null
-
-            public RelayCommand(Action<object?> execute, Func<object?, bool>? canExecute = null)
-            {
-                _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-                _canExecute = canExecute;
-            }
+            public event EventHandler? CanExecuteChanged;
 
             public RelayCommand(Action execute)
-             : this(execute != null ? new Action<object?>(_ => execute()) : null!, null)
             {
-                if (execute == null) throw new ArgumentNullException(nameof(execute));
+                _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             }
 
-            public bool CanExecute(object? parameter)
-            {
-                return _canExecute?.Invoke(parameter) ?? true;
-            }
+            public bool CanExecute(object? parameter) => _canExecute;
 
             public void Execute(object? parameter)
             {
-                _execute(parameter);
+                if (!_canExecute) return;
+
+                _canExecute = false;
+                try
+                {
+                    _execute();
+                    CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+                }
+                finally
+                {
+                    _canExecute = true;
+                }
             }
 
             public void RaiseCanExecuteChanged()

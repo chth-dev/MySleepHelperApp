@@ -19,12 +19,14 @@
             </Grid.RowDefinitions>
 
             <!-- Заголовок -->
-            <TextBlock Grid.Row="0"
-                           Text="Настройка таймера выключения"
-                           Style="{StaticResource HeaderTextStyle}"
-                           FontSize="26"
-                           Margin="20,40,20,0"
-                           HorizontalAlignment="Center"/>
+            <TextBlock 
+                x:Name="TitleText"
+                Grid.Row="0"
+                Text="Настройка таймера выключения"
+                Style="{StaticResource HeaderTextStyle}"
+                FontSize="26"
+                Margin="20,40,20,0"
+                HorizontalAlignment="Center"/>
 
             <!-- Центральная область -->
             <Border 

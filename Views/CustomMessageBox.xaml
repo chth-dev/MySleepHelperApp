@@ -62,7 +62,10 @@
                     Command="{Binding Command}"
                     Style="{StaticResource PrimaryButton}"
                     Margin="10"
-                    FontSize="20"/>
+                    FontSize="20"
+                    Focusable="True"
+                    IsDefault="True"
+                    IsCancel="True" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

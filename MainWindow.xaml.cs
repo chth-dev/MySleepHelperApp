@@ -8,6 +8,7 @@ namespace MySleepHelperApp
 {
     public partial class MainWindow : Window
     {
+        private HomeView _homeView;
         private ShutdownTimerView _shutdownTimerView;
         private BrightnessView _brightnessView;
         private KeyboardLockView _keyboardView;
@@ -19,6 +20,7 @@ namespace MySleepHelperApp
             this.Closed += MainWindow_Closed; // Подписываемся на событие закрытия
 
             // Инициализация вкладок
+            _homeView = new HomeView();
             _shutdownTimerView = new ShutdownTimerView();
             _brightnessView = new BrightnessView();
             _keyboardView = new KeyboardLockView();
@@ -32,8 +34,8 @@ namespace MySleepHelperApp
             HelpTab.Checked += HelpTab_Checked;
 
             // Установка вкладки по умолчанию
-            SwitchToTab(_shutdownTimerView, "Настройка таймера выключения");
-            ShutdownTab.IsChecked = true;
+            SwitchToTab(_homeView, "Домашняя страница");
+            HomeTab.IsChecked = true;
         }
 
         private void SwitchToTab(UserControl tabContent, string headerText)
@@ -94,7 +96,7 @@ namespace MySleepHelperApp
             {
                 // Используем кастомный диалог
                 var result = CustomMessageBox.ShowYesNoDialog(
-                    "При закрытии приложения функция таймера выключения, блокировки клавиатуры и регулировка яркости будут остановлены. Всё равно закрыть?",
+                    "При закрытии приложения функции таймера выключения, блокировки клавиатуры и регулировки яркости будут остановлены. Всё равно закрыть?",
                     "Предупреждение!",
                     this);
 
