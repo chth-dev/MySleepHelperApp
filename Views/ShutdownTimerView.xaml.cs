@@ -228,7 +228,8 @@ namespace MySleepHelperApp.Views
             {
                 var result = CustomMessageBox.ShowDialog(
                     "Пожалуйста, введите время больше нуля, иначе таймер выключения не сможет работать \n:(",
-                    "Предупреждение!");
+                    "Предупреждение!",
+                    Window.GetWindow(this));
                 return;
             }
 
