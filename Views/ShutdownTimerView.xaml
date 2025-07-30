@@ -139,8 +139,7 @@
                 Height="60" 
                 Width="240"
                 FontSize="18"
-                Padding="10"
-                Click="ScheduleShutdown_Click">
+                Padding="10">
                 <TextBlock 
                     x:Name="ButtonText"
                     Text="Запланировать выключение компьютера" 

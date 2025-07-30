@@ -53,30 +53,44 @@ namespace MySleepHelperApp.Views
             InputPanel.Visibility = Visibility.Visible;
             CountdownText.Text = "00:00:00";
 
-            // Сброс полей ввода
-            HoursTextBox.Text = "00";
-            MinutesTextBox.Text = "00";
-            SecondsTextBox.Text = "00";
+            // Сбрасываем поля ввода, но не устанавливаем "00" в Text
+            HoursTextBox.Text = "";
+            MinutesTextBox.Text = "";
+            SecondsTextBox.Text = "";
+
+            // Принудительно показываем плейсхолдеры
+            FindPlaceholder(HoursTextBox)?.Visibility = Visibility.Visible;
+            FindPlaceholder(MinutesTextBox)?.Visibility = Visibility.Visible;
+            FindPlaceholder(SecondsTextBox)?.Visibility = Visibility.Visible;
 
             TitleText.Text = "Настройка таймера выключения";
         }
 
         //........................................... 2.Обработчики текстовых полей
 
-        // Обрабатывает получение фокуса текстовым полем: скрывает плейсхолдер "00".
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        private TextBlock? FindPlaceholder(TextBox textBox)
         {
-            if (sender is TextBox textBox && textBox.Parent is Grid grid)
+            if (textBox.Parent is Grid grid)
             {
                 foreach (var child in grid.Children)
                 {
                     if (child is TextBlock placeholder &&
                         placeholder.Name == textBox.Name + "Placeholder")
                     {
-                        placeholder.Visibility = Visibility.Collapsed;
-                        break;
+                        return placeholder;
                     }
                 }
+            }
+            return null;
+        }
+
+        // Обрабатывает получение фокуса текстовым полем: скрывает плейсхолдер "00".
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                var placeholder = FindPlaceholder(textBox);
+                placeholder?.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -84,23 +98,23 @@ namespace MySleepHelperApp.Views
         // Обрабатывает потерю фокуса: валидирует значение, форматирует вывод и управляет плейсхолдером.
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (sender is TextBox textBox && textBox.Parent is Grid grid)
+            if (sender is TextBox textBox)
             {
-                // Корректируем значение и форматируем текст
+                // 1. Сначала корректируем значение
                 GetSafeValue(textBox, textBox.Name == "HoursTextBox");
 
-                // Обновляем плейсхолдер
-                foreach (var child in grid.Children)
+                // 2. Потом управляем плейсхолдером
+                var placeholder = FindPlaceholder(textBox);
+                if (placeholder != null)
                 {
-                    if (child is TextBlock placeholder &&
-                        placeholder.Name == textBox.Name + "Placeholder")
+                    // Показываем плейсхолдер, только если поле ввода пустое
+                    if (string.IsNullOrEmpty(textBox.Text))
                     {
-                        if (string.IsNullOrEmpty(textBox.Text))
-                        {
-                            textBox.Text = "0";
-                            placeholder.Visibility = Visibility.Collapsed;
-                        }
-                        break;
+                        placeholder.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        placeholder.Visibility = Visibility.Collapsed;
                     }
                 }
             }
@@ -168,29 +182,25 @@ namespace MySleepHelperApp.Views
         // Проверяет и корректирует значение текстового поля, возвращая валидное число.
         private static int GetSafeValue(TextBox textBox, bool isHours = false)
         {
-            // 1. Обрабатываем пустое поле
+            // 1. Если поле пустое — не трогаем его
             if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-                textBox.Text = "00"; // Автоматически ставим "00" вместо пустоты
-                return 0;
+                return 0; // возвращаем 0, но не меняем Text
             }
 
             // 2. Пробуем преобразовать в число
             if (!int.TryParse(textBox.Text, out int value))
             {
-                textBox.Text = "00"; // Если ввели не цифры, сбрасываем
+                // Можно не сбрасывать, или показать сообщение
                 return 0;
             }
 
-            // 3. Определяем ограничения
+            // 3. Ограничения
             int maxValue = isHours ? 23 : 59;
-
-            // 4. Корректируем значение
             value = Math.Clamp(value, 0, maxValue);
 
-            // 5. Обновляем TextBox (добавляем ведущий ноль для 1-значных чисел)
+            // 4. Форматируем (только если значение есть)
             textBox.Text = value.ToString("00");
-
             return value;
         }
 
@@ -218,8 +228,7 @@ namespace MySleepHelperApp.Views
             {
                 var result = CustomMessageBox.ShowDialog(
                     "Пожалуйста, введите время больше нуля, иначе таймер выключения не сможет работать \n:(",
-                    "Предупреждение!"
-                    );
+                    "Предупреждение!");
                 return;
             }
 

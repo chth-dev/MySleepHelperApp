@@ -3,6 +3,8 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
+	<LangVersion>12.0</LangVersion>
+	<LangVersion>preview</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
@@ -11,6 +13,7 @@
 
   <ItemGroup>
     <None Remove="Styles\Assets\brightness_icon.png" />
+    <None Remove="Styles\Assets\cat_brightness.png" />
     <None Remove="Styles\Assets\cat_help.png" />
     <None Remove="Styles\Assets\cat_home.png" />
     <None Remove="Styles\Assets\cat_keyboard.png" />
@@ -29,6 +32,9 @@
 
   <ItemGroup>
     <Resource Include="Styles\Assets\brightness_icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Styles\Assets\cat_brightness.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Styles\Assets\cat_help.png">

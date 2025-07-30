@@ -237,4 +237,76 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
+    <!-- 15. Простой кастомный стиль слайдера -->
+    <Style x:Key="SliderStyle" TargetType="Slider">
+        <!-- Базовые свойства -->
+        <Setter Property="Foreground" Value="{StaticResource DarkPurple}"/>
+        <Setter Property="Background" Value="{StaticResource LightPurple}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="TickPlacement" Value="None"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="300"/>
+
+        <!-- Шаблон -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Slider">
+                    <Grid>
+                        <Track x:Name="PART_Track">
+                            <!-- Заполненная часть -->
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton 
+                                Background="{StaticResource MediumPurple}"
+                                Focusable="False"
+                                IsTabStop="False">
+                                    <RepeatButton.Template>
+                                        <ControlTemplate>
+                                            <Border 
+                                            Background="{TemplateBinding Background}"
+                                            CornerRadius="4"/>
+                                        </ControlTemplate>
+                                    </RepeatButton.Template>
+                                </RepeatButton>
+                            </Track.DecreaseRepeatButton>
+
+                            <!-- Пустая часть -->
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton 
+                                Background="{StaticResource LightPurple}"
+                                Focusable="False"
+                                IsTabStop="False">
+                                    <RepeatButton.Template>
+                                        <ControlTemplate>
+                                            <Border 
+                                            Background="{TemplateBinding Background}"
+                                            CornerRadius="4"/>
+                                        </ControlTemplate>
+                                    </RepeatButton.Template>
+                                </RepeatButton>
+                            </Track.IncreaseRepeatButton>
+
+                            <!-- Простой бегунок -->
+                            <Track.Thumb>
+                                <Thumb>
+                                    <Thumb.Template>
+                                        <ControlTemplate>
+                                            <Ellipse 
+                                            Fill="{StaticResource AccentBrush}"
+                                            Stroke="{StaticResource DarkPurple}"
+                                            StrokeThickness="2"
+                                            Width="18"
+                                            Height="18"/>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 </ResourceDictionary>
