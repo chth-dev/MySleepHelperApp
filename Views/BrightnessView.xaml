@@ -57,14 +57,14 @@
             Source="{StaticResource BrightnessImage}"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Margin="20"
+            Margin="25,25,0,0"
             Width="auto"/>
 
         <StackPanel 
             Grid.Row="2" 
             Grid.Column="0" 
             Grid.ColumnSpan="2"
-            Margin="0"
+            Margin="0,0,0,10"
             VerticalAlignment="Center"
             Orientation="Vertical">
 

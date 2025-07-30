@@ -30,13 +30,13 @@
 
         <Border 
             x:Name="KeyboardActive"
-            Grid.Row="1" 
+            Grid.Row="2" 
             Grid.Column="0" 
-            Margin="5" 
+            Margin="10" 
             Padding="5" 
             Height="60" 
             Width="292"
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
             Style="{StaticResource HelpBorderBoxStyle}">
             <Grid>
                 <Grid.RowDefinitions>
@@ -108,7 +108,7 @@
         <!-- Кнопка -->
         <Button 
             x:Name="KeyboardLockButton"
-            Grid.Row="2" 
+            Grid.Row="1" 
             Grid.Column="0"
             Style="{StaticResource PrimaryButton}"
             Height="60" 
@@ -117,7 +117,7 @@
             Padding="10"
             Click="KeyboardLockButton_Click"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
             Margin="10">
             <TextBlock 
                 x:Name="ButtonText"
@@ -134,7 +134,7 @@
             Source="{StaticResource KeyboardLockImage}"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Margin="10"
-            Width="120"/>
+            Margin="30"
+            Width="auto"/>
     </Grid>
 </UserControl>
