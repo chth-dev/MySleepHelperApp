@@ -88,6 +88,10 @@ namespace MySleepHelperApp
 
             // 3. Освобождаем хук клавиатуры
             _keyboardView?.ReleaseKeyboardHook();
+
+            // 4. Выключаем оверлей яркости
+            _brightnessView?.TurnOffOverlay();
+
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)

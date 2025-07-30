@@ -21,7 +21,7 @@
         <TextBlock 
             Grid.Row="0" 
             Grid.Column="0"
-            Text="Регулировка яркости &#10;экрана"
+            Text="Регулировка&#10;затемнения экрана"
             Style="{StaticResource HeaderTextStyle}"
             FontSize="26"
             Margin="10"

@@ -1,45 +1,43 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using MySleepHelperApp.Services;
 
 
 namespace MySleepHelperApp.Views
 {
     public partial class BrightnessView : UserControl
     {
-            // Ссылка на оверлей
-            private BrightnessOverlayWindow _overlayWindow;
-            // Состояние: включён ли оверлей
-            private bool _isOverlayActive = false;
+        // Ссылка на мульти-экран оверлей
+        private MultiScreenBrightnessOverlay? _overlay = null;
+        // Состояние: включён ли оверлей
+        private bool _isOverlayActive = false;
 
-            public BrightnessView()
+        public BrightnessView()
+        {
+            InitializeComponent();
+            UpdateBrightnessText();
+        }
+
+        private void BrightnessButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!_isOverlayActive)
             {
-                InitializeComponent();
-                // Установим начальное значение текста
-                UpdateBrightnessText();
+                // Создаём и показываем оверлей на всех экранах
+                _overlay = new MultiScreenBrightnessOverlay();
+                _overlay.Show();
+                _isOverlayActive = true;
+                ButtonText.Text = "Выключить";
+                UpdateOverlayBrightness();
             }
-
-            private void BrightnessButton_Click(object sender, RoutedEventArgs e)
+            else
             {
-                if (!_isOverlayActive)
-                {
-                    // Создаём и показываем оверлей
-                    _overlayWindow = new BrightnessOverlayWindow();
-                    _overlayWindow.Show();
-                    _isOverlayActive = true;
-                    ButtonText.Text = "Выключить";
-
-                    // Устанавливаем яркость по текущему значению ползунка
-                    UpdateOverlayBrightness();
-                }
-                else
-                {
-                    // Скрываем оверлей
-                    _overlayWindow?.Close();
-                    _overlayWindow = null;
-                    _isOverlayActive = false;
-                    ButtonText.Text = "Включить";
-                }
+                // Скрываем оверлей
+                _overlay?.Hide();
+                _overlay = null;
+                _isOverlayActive = false;
+                ButtonText.Text = "Включить";
             }
+        }
 
         private void BrightnessSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -59,11 +57,21 @@ namespace MySleepHelperApp.Views
         // Обновляем яркость оверлея
         private void UpdateOverlayBrightness()
         {
-            if (_overlayWindow != null)
+            if (_overlay != null)
             {
-                _overlayWindow.SetBrightness(BrightnessSlider.Value);
+                _overlay.SetBrightness(BrightnessSlider.Value);
             }
         }
 
+        // Публичный метод для выключения оверлея извне
+        public void TurnOffOverlay()
+        {
+            if (_isOverlayActive && _overlay != null)
+            {
+                _overlay.Hide();
+                _overlay = null;
+                _isOverlayActive = false;
+            }
+        }
     }
 }

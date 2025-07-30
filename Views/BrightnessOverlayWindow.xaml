@@ -7,10 +7,23 @@
         Background="Black"
         Opacity="0.5"
         Topmost="True"
-        WindowState="Maximized"
         ShowInTaskbar="False"
-        IsHitTestVisible="False"
+        ResizeMode="NoResize"
         Focusable="False"
-        IsEnabled="False"
-        ResizeMode="NoResize">
+        IsHitTestVisible="False"
+        SnapsToDevicePixels="True">
+
+    <Window.Style>
+        <Style TargetType="Window">
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome 
+                        ResizeBorderThickness="0" 
+                        CaptionHeight="0" 
+                        CornerRadius="0"
+                        GlassFrameThickness="0"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
 </Window>
