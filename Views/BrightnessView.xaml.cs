@@ -28,7 +28,6 @@ namespace MySleepHelperApp.Views
                 // Создаём и показываем оверлей на всех экранах
                 _overlay = new MultiScreenBrightnessOverlay();
                 _overlay.Show();
-                _isOverlayActive = true;
                 ButtonText.Text = "Выключить";
                 UpdateOverlayBrightness();
                 _isOverlayActive = true;
@@ -38,7 +37,6 @@ namespace MySleepHelperApp.Views
                 // Скрываем оверлей
                 _overlay?.Hide();
                 _overlay = null;
-                _isOverlayActive = false;
                 ButtonText.Text = "Включить";
                 _isOverlayActive = false;
             }

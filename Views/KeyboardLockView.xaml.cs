@@ -10,9 +10,8 @@ namespace MySleepHelperApp.Views
     {
         private KeyboardHook? _keyboardHook;
         private static TransparentOverlay? _currentBlocker;
-        private bool _isLockActive;
 
-        public bool IsKeyboardHookActive => _isLockActive;
+        public bool IsKeyboardHookActive => _isBlockRunning;
         public static TransparentOverlay? CurrentBlocker => _currentBlocker;
 
         public KeyboardLockView()
@@ -39,7 +38,7 @@ namespace MySleepHelperApp.Views
             try
             {
                 _keyboardHook = new KeyboardHook();
-                _isLockActive = true;
+                _isBlockRunning = true;
 
                 _currentBlocker = new TransparentOverlay();
                 _currentBlocker.Closed += (s, args) =>
