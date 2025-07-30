@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              Background="Transparent">
-    <Grid>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <!-- Главная сетка: 3 строки, 2 столбца -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/> <!-- Заголовок -->

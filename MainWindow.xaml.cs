@@ -148,7 +148,10 @@ namespace MySleepHelperApp
             // Проверяем активна ли блокировка клавиатуры
             bool isKeyboardLockActive = _keyboardView?.IsKeyboardHookActive ?? false;
 
-            return isShutdownTimerActive || isKeyboardLockActive;
+            // Проверяем активен ли оверлей регулировки яркости 
+            bool isBrightnessOverlayActive = _brightnessView?.IsOverlayActive ?? false;
+
+            return isShutdownTimerActive || isKeyboardLockActive || isBrightnessOverlayActive;
         }
     }
 }

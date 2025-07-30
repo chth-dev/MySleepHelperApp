@@ -7,7 +7,7 @@
              Background="Transparent">
 
 
-    <Grid>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -154,7 +154,7 @@
                            Source="{StaticResource ShutdownImage}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Bottom"
-                           Margin="20,0,0,20" Height="auto" Width="230">
+                           Margin="20,0,0,20" Height="auto" Width="210">
         </Image>
 
     </Grid>

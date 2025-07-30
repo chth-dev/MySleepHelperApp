@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MySleepHelperApp.Views"
              mc:Ignorable="d" 
              Background="Transparent">
-    <Grid Margin="40">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -57,7 +57,7 @@
             Source="{StaticResource BrightnessImage}"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Margin="10"
+            Margin="10,10,20,10"
             Width="140"/>
 
         <StackPanel 
@@ -84,7 +84,7 @@
                 Minimum="0"    
                 Maximum="100"  
                 Value="50"     
-                Width="350"
+                Width="400"
                 Height="auto"
                 Margin="5"
                 ValueChanged="BrightnessSlider_ValueChanged"/>

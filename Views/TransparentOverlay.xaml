@@ -10,14 +10,14 @@
 
     <!-- Основной прозрачный слой -->
     <Grid>
-        <!-- Можно добавить подсказку (опционально) -->
+        <!-- Подсказка -->
         <TextBlock Text="Клавиатура заблокирована. Для разблокировки вернитесь в приложение My Sleep Helper."
                    Foreground="White"
-                   Opacity="0.3"
+                   Opacity="0.4"
                    HorizontalAlignment="Center"
                    Style="{StaticResource HelpTextBoxStyle}"
                    VerticalAlignment="Bottom"
-                   Margin="5"
+                   Margin="5,45"
                    FontSize="15"/>
     </Grid>
 </Window>

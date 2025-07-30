@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MySleepHelperApp.Views"
              mc:Ignorable="d" 
              Background="Transparent">
-    <Grid Margin="30,60">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>

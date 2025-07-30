@@ -12,6 +12,9 @@ namespace MySleepHelperApp.Views
         // Состояние: включён ли оверлей
         private bool _isOverlayActive = false;
 
+        // Публичное свойство для проверки состояния оверлея
+        public bool IsOverlayActive => _isOverlayActive; // Только для чтения
+
         public BrightnessView()
         {
             InitializeComponent();
@@ -28,6 +31,7 @@ namespace MySleepHelperApp.Views
                 _isOverlayActive = true;
                 ButtonText.Text = "Выключить";
                 UpdateOverlayBrightness();
+                _isOverlayActive = true;
             }
             else
             {
@@ -36,6 +40,7 @@ namespace MySleepHelperApp.Views
                 _overlay = null;
                 _isOverlayActive = false;
                 ButtonText.Text = "Включить";
+                _isOverlayActive = false;
             }
         }
 
@@ -70,7 +75,7 @@ namespace MySleepHelperApp.Views
             {
                 _overlay.Hide();
                 _overlay = null;
-                _isOverlayActive = false;
+                _isOverlayActive = false; // <-- Сбрасываем флаг
             }
         }
     }
