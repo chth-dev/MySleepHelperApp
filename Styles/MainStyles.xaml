@@ -308,5 +308,14 @@
         </Setter>
     </Style>
 
+    <!-- 9. СТИЛЬ таймера -->
+    <Style x:Key="TimerTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Pixeboy"/>
+        <Setter Property="Foreground" Value="{StaticResource MediumPurple}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
 
 </ResourceDictionary>

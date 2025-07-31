@@ -19,6 +19,8 @@ namespace MySleepHelperApp.Views
         {
             InitializeComponent();
             UpdateBrightnessText();
+            // Изначально делаем панель неактивной
+            SetControlsEnabled(false);
         }
 
         private void BrightnessButton_Click(object sender, RoutedEventArgs e)
@@ -31,6 +33,7 @@ namespace MySleepHelperApp.Views
                 ButtonText.Text = "Выключить";
                 UpdateOverlayBrightness();
                 _isOverlayActive = true;
+                SetControlsEnabled(true);
             }
             else
             {
@@ -39,6 +42,7 @@ namespace MySleepHelperApp.Views
                 _overlay = null;
                 ButtonText.Text = "Включить";
                 _isOverlayActive = false;
+                SetControlsEnabled(false);
             }
         }
 
@@ -74,6 +78,16 @@ namespace MySleepHelperApp.Views
                 _overlay.Hide();
                 _overlay = null;
                 _isOverlayActive = false; // <-- Сбрасываем флаг
+            }
+        }
+
+        // Метод для включения/выключения элементов управления
+        private void SetControlsEnabled(bool isEnabled)
+        {
+            if (BrightnessControlsPanel != null) // Проверяем, существует ли панель
+            {
+                BrightnessControlsPanel.IsEnabled = isEnabled;
+                BrightnessControlsPanel.Opacity = isEnabled ? 1.0 : 0.5;
             }
         }
     }

@@ -24,7 +24,7 @@
                    Text="Возможности My Sleep Helper"
                    Style="{StaticResource HeaderTextStyle}"
                    FontSize="26"
-                   Margin="20,40,20,0"
+                   Margin="10,10,10,0"
                    HorizontalAlignment="Center"/>
 
         <!-- Блок 1: Таймер выключения (левый столбец, строка 1) -->

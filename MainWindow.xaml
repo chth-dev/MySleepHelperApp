@@ -36,7 +36,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Sleep Helper" 
+                    <TextBlock Text="My Sleep Helper" 
                                Style="{StaticResource HeaderTextStyle}"
                                FontSize="16"
                                Margin="15,0"
