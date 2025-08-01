@@ -11,21 +11,54 @@ namespace MySleepHelperApp.Services
     {
 
         // Выключает компьютер через указанное время.
-        public static void ShutdownComputer(int seconds)
+        public static bool ShutdownComputer(int seconds)
         {
-            Process process = new(); // Создаём процесс (как если бы cmd.exe запустили вручную)
 
-            ProcessStartInfo startInfo = new()
+            try
             {
-                WindowStyle = ProcessWindowStyle.Hidden, // Скрываем окно командной строки
-                FileName = "cmd.exe",                    // Запускаем командную строку
-                Arguments = $"/C shutdown -s -f -t {seconds}", // Команда выключения
-                Verb = "runas" // Запуск от имени администратора (важно!)
-            }; // Настройки запуска процесса
+                using (Process process = new Process())
+                {
+                    process.StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "shutdown.exe",
+                        Arguments = $"/s /f /t {seconds}",
+                        Verb = "runas", // Запуск от имени администратора
+                        UseShellExecute = true,
+                        WindowStyle = ProcessWindowStyle.Hidden
+                    };
 
-            process.StartInfo = startInfo; // Привязываем настройки к процессу
+                    process.Start();
+                    process.WaitForExit();
 
-            process.Start(); // Запускаем процесс
+                    int exitCode = process.ExitCode;
+                    Debug.WriteLine($"[ShutdownComputer] ExitCode: {exitCode}");
+
+                    // Успешные коды
+                    if (exitCode == 0 || exitCode == 1190)
+                        return true;
+
+                    // Известные коды ошибок
+                    switch (exitCode)
+                    {
+                        case 5: // Access denied
+                            Debug.WriteLine("Ошибка: Недостаточно прав. Запустите приложение от имени администратора.");
+                            break;
+                        case 1115: // System shutdown was blocked
+                            Debug.WriteLine("Ошибка: Выключение заблокировано (например, установлены обновления).");
+                            break;
+                        default:
+                            Debug.WriteLine($"Неизвестная ошибка shutdown.exe: {exitCode}");
+                            break;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[ShutdownComputer] Ошибка: {ex.Message}");
+                return false;
+            }
         }
 
         // Отменяет запланированное выключение. 

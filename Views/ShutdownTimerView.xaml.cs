@@ -210,10 +210,10 @@ namespace MySleepHelperApp.Views
         // Обрабатывает нажатие кнопки "Запланировать": запускает таймер выключения.
         private void ScheduleShutdown_Click(object sender, RoutedEventArgs e)
         {
-            // Используем наш метод GetSafeValue для получения значений с ограничениями
+            // Получаем и валидируем время
             int hours = GetSafeValue(HoursTextBox, true);    // true - это часы (0-23)
-            int minutes = GetSafeValue(MinutesTextBox);     // минуты (0-59)
-            int seconds = GetSafeValue(SecondsTextBox);     // секунды (0-59)
+            int minutes = GetSafeValue(MinutesTextBox);      // минуты (0-59)
+            int seconds = GetSafeValue(SecondsTextBox);      // секунды (0-59)
 
             // Показываем скорректированные значения
             HoursTextBox.Text = hours.ToString("00");
@@ -227,18 +227,37 @@ namespace MySleepHelperApp.Views
             if (totalSeconds <= 0)
             {
                 ResetUI();
-                var result = CustomMessageBox.ShowDialog(
+                CustomMessageBox.ShowDialog(
                     "Пожалуйста, введите время больше нуля, иначе таймер выключения не сможет работать \n:(",
                     "Предупреждение!",
                     Window.GetWindow(this));
                 return;
             }
 
-            SystemCommandService.ShutdownComputer(totalSeconds);
-            _timerService.Start(totalSeconds); // Запускаем через сервис
+            // Пытаемся отправить команду выключения
+            bool shutdownCommandSuccess = SystemCommandService.ShutdownComputer(totalSeconds);
 
-            _isTimerRunning = true;  // Ставим флаг "таймер работает"
-            UpdateButtonState();     // Обновляем кнопку
+            if (shutdownCommandSuccess)
+            {
+                // Успех: запускаем таймер и обновляем UI
+                _timerService.Start(totalSeconds);
+                _isTimerRunning = true;
+                UpdateButtonState();
+
+                CustomMessageBox.ShowDialog(
+                    "Таймер активирован. Компьютер будет выключен через заданное время.",
+                    "Ура!",
+                    Window.GetWindow(this));
+            }
+            else
+            {
+                // Ошибка: сбрасываем состояние
+                CustomMessageBox.ShowDialog(
+                    "Не удалось запланировать выключение. Попробуйте перезапустить приложение от имени администратора.",
+                    "Упс!",
+                    Window.GetWindow(this));
+                ResetUI();
+            }
         }
 
 
