@@ -41,7 +41,7 @@
                    Text="Возможности My Sleep Helper"
                    Style="{StaticResource HeaderTextStyle}"
                    FontSize="26"
-                   Margin="10,10,10,0"
+                   Margin="20,20,20,15"
                    HorizontalAlignment="Center"/>
 
         <!-- Блок 1: Таймер выключения  -->
@@ -72,7 +72,8 @@
                            Grid.Column="1"
                            Text="Таймер выключения" 
                            Style="{StaticResource HeaderTextStyle}"
-                           FontSize="22"/>
+                           FontSize="22"
+                           Margin="10,10,10,5"/>
 
                 <TextBlock Grid.Row="1" 
                            Grid.Column="2" 
@@ -82,7 +83,7 @@
                            Margin="10"
                            TextWrapping="Wrap"
                            Width="350"
-                           Style="{StaticResource HelpTextBoxStyle}"/>
+                           Style="{StaticResource HelpTextBoxStyle}" TextAlignment="Center"/>
             </Grid>
         </Border>
 
@@ -110,14 +111,15 @@
                 <TextBlock Grid.Row="0" Grid.Column="1"
                            Text="Регулировка яркости" 
                            Style="{StaticResource HeaderTextStyle}"
-                           FontSize="22"/>
+                           FontSize="22"
+                           Margin="10,10,10,5"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
                            Text="Уменьшение яркости экрана монитора для комфортного засыпания." 
                            FontSize="18" Margin="10"
                            TextWrapping="Wrap"
                            Width="350"
-                           Style="{StaticResource HelpTextBoxStyle}"/>
+                           Style="{StaticResource HelpTextBoxStyle}" TextAlignment="Center"/>
             </Grid>
         </Border>
 
@@ -146,27 +148,47 @@
                            Text="Блокировка клавиатуры" 
                            Style="{StaticResource HeaderTextStyle}"
                            FontSize="22"
-                           Margin="5"/>
+                           Margin="10,10,10,5"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
                            Text="Отключение клавиатуры для защиты от случайных нажатий. Например, котиками." 
                            FontSize="18" Margin="10"
                            TextWrapping="Wrap"
                            Width="350"
-                           Style="{StaticResource HelpTextBoxStyle}"/>
+                           Style="{StaticResource HelpTextBoxStyle}" TextAlignment="Center"/>
             </Grid>
         </Border>
 
         <!-- Заголовок  -->
-        <TextBlock Grid.Row="4" 
+                <Grid Grid.Row="4">
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                <TextBlock  
+                   Grid.Row="0"
                    Text="Информация о приложении"
                    Style="{StaticResource HeaderTextStyle}"
                    FontSize="26"
-                   Margin="10,10,10,0"
+                   Margin="20,20,20,15"
                    HorizontalAlignment="Center"/>
 
+                    <TextBlock 
+                       Grid.Row="1" 
+                       FontSize="20" 
+                       Margin="10"
+                       TextWrapping="Wrap"
+                       Width="350"
+                       Style="{StaticResource HelpTextBoxStyle}">
+                       Версия приложения: 1.0<LineBreak/>
+                       Разработчик: chth
+                     </TextBlock>
 
-        <!-- Картинка (правый столбец, строка 2) -->
+                </Grid>
+            
+                <!-- Картинка (правый столбец, строка 2) -->
         <!--<Image Grid.Row="2" Grid.RowSpan="3" Grid.Column="1"
                Source="{StaticResource HelpImage}"
                HorizontalAlignment="Center"
