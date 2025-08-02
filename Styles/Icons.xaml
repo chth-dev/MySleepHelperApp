@@ -36,6 +36,5 @@
 
     <BitmapImage x:Key="CheckmarkIcon" 
                  UriSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/checkmark_icon.png"/>
-    
 
 </ResourceDictionary>

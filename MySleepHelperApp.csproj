@@ -23,12 +23,17 @@
     <None Remove="Styles\Assets\cross_icon.png" />
     <None Remove="Styles\Assets\help_icon.png" />
     <None Remove="Styles\Assets\home_icon.png" />
+    <None Remove="Styles\Assets\iconsleephelper.ico" />
     <None Remove="Styles\Assets\keyboard_icon.png" />
     <None Remove="Styles\Assets\timer_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="iconsleephelper.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -60,6 +65,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Styles\Assets\home_icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Styles\Assets\iconsleephelper.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Styles\Assets\keyboard_icon.png">

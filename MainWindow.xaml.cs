@@ -1,13 +1,16 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using MySleepHelperApp.Views;
+using Hardcodet.Wpf.TaskbarNotification;
 using MySleepHelperApp.Services;
+using MySleepHelperApp.Views;
 
 namespace MySleepHelperApp
 {
     public partial class MainWindow : Window
     {
+        private TaskbarIcon notifyIcon;
         private HomeView _homeView;
         private ShutdownTimerView _shutdownTimerView;
         private BrightnessView _brightnessView;
@@ -36,6 +39,13 @@ namespace MySleepHelperApp
             // Установка вкладки по умолчанию
             SwitchToTab(_homeView, "Домашняя страница");
             HomeTab.IsChecked = true;
+
+            // Инициализируем TaskbarIcon, найдя его по имени из XAML
+            notifyIcon = (TaskbarIcon)FindName("MyNotifyIcon");
+            if (notifyIcon == null)
+            {
+                System.Diagnostics.Debug.WriteLine("Ошибка: TaskbarIcon не найден в XAML по имени 'MyNotifyIcon'.");
+            }
         }
 
         private void SwitchToTab(UserControl tabContent, string headerText)
@@ -46,7 +56,7 @@ namespace MySleepHelperApp
         private void HomeTab_Checked(object sender, RoutedEventArgs e)
         {
             if (HomeTab.IsChecked == true)
-                SwitchToTab(new HomeView(), "Добро пожаловать в Sleep Helper");
+                SwitchToTab(new HomeView(), "Добро пожаловать в My Sleep Helper");
         }
 
         private void ShutdownTab_Checked(object sender, RoutedEventArgs e)
@@ -58,13 +68,13 @@ namespace MySleepHelperApp
         private void BrightnessTab_Checked(object sender, RoutedEventArgs e)
         {
             if (BrightnessTab.IsChecked == true)
-                SwitchToTab(_brightnessView, "Управление яркостью экрана");
+                SwitchToTab(_brightnessView, "Управление затемнением экрана");
         }
 
         private void KeyboardTab_Checked(object sender, RoutedEventArgs e)
         {
             if (KeyboardTab.IsChecked == true)
-                SwitchToTab(_keyboardView, "Настройки клавиатуры");
+                SwitchToTab(_keyboardView, "Блокировка клавиатуры");
         }
 
         private void HelpTab_Checked(object sender, RoutedEventArgs e)
@@ -78,27 +88,26 @@ namespace MySleepHelperApp
             this.WindowState = WindowState.Minimized;
         }
 
+        // Вся логика очистки и завершения
+        private bool PerformCloseApplicationLogic()
+        {
+            SystemCommandService.CancelShutdown();
+            KeyboardLockView.CurrentBlocker?.Close();
+            _keyboardView?.ReleaseKeyboardHook();
+            _brightnessView?.TurnOffOverlay();
+            return true; // Успешное выполнение
+        }
+
         private void MainWindow_Closed(object? sender, EventArgs e)
         {
-            // 1. Отменяем запланированное выключение компьютера
-            SystemCommandService.CancelShutdown();
-
-            // 2. Закрываем блокировщик клавиатуры
-            KeyboardLockView.CurrentBlocker?.Close();
-
-            // 3. Освобождаем хук клавиатуры
-            _keyboardView?.ReleaseKeyboardHook();
-
-            // 4. Выключаем оверлей яркости
-            _brightnessView?.TurnOffOverlay();
-
+            Debug.WriteLine("[MainWindow] Событие Closed сработало.");
+            PerformCloseApplicationLogic();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             if (AreCriticalFunctionsActive())
             {
-                // Используем кастомный диалог
                 var result = CustomMessageBox.ShowYesNoDialog(
                     "При закрытии приложения функции таймера выключения, блокировки клавиатуры и регулировки яркости будут остановлены. Всё равно закрыть?",
                     "Предупреждение!",
@@ -106,13 +115,10 @@ namespace MySleepHelperApp
 
                 if (result != true)
                 {
-                    // Пользователь нажал "Нет" или закрыл окно
                     return;
                 }
             }
-
-            // Если критические функции не активны или пользователь нажал "Да"
-            this.Close(); // Это вызовет MainWindow_Closed
+            this.Close();
         }
 
         private bool _isDragging = false;
@@ -152,6 +158,82 @@ namespace MySleepHelperApp
             bool isBrightnessOverlayActive = _brightnessView?.IsOverlayActive ?? false;
 
             return isShutdownTimerActive || isKeyboardLockActive || isBrightnessOverlayActive;
+        }
+
+        // Метод для показа окна
+        private void ShowMainWindow()
+        {
+            this.Show();
+            this.WindowState = WindowState.Normal; // Восстановить из свернутого/скрытого состояния
+            this.Activate(); // Активировать окно, чтобы оно появилось на переднем плане
+        }
+
+        // Метод для скрытия окна в трей
+        private void HideToTray()
+        {
+            this.Hide(); // Скрываем окно WPF
+        }
+
+        private void TrayCloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            HideToTray(); // Скрываем окно в трей        
+            
+            // Проверяем активен ли таймер выключения через ваш UserControl
+            bool isShutdownTimerActive = _shutdownTimerView?.IsTimerActive ?? false;
+
+            // Показываем уведомление только если таймер активен
+            if (isShutdownTimerActive)
+            {
+                notifyIcon?.ShowBalloonTip(
+                    "Приложение свернуто",
+                    "Таймер продолжает работать в трее.",
+                    Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Info
+                );
+            }
+        }
+
+        // Обработчик для пункта "Открыть" в контекстном меню иконки в трее
+        private void MenuItem_Open_Click(object sender, RoutedEventArgs e)
+        {
+            ShowMainWindow(); // Показываем главное окно
+        }
+
+        // Обработчик для пункта "Закрыть" в контекстном меню иконки в трее
+        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("[MainWindow] Закрытие через контекстное меню трея.");
+            if (AreCriticalFunctionsActive())
+            {
+                // Показываем окно перед диалогом, если оно скрыто
+                this.Show();
+                this.WindowState = WindowState.Normal;
+                this.Activate();
+
+                var result = CustomMessageBox.ShowYesNoDialog(
+                    "При закрытии приложения функции таймера выключения, блокировки клавиатуры и регулировки яркости будут остановлены. Всё равно закрыть?",
+                    "Предупреждение!",
+                    this);
+
+                if (result != true)
+                {
+                    Debug.WriteLine("[MainWindow] Пользователь отменил закрытие через трей.");
+                    return;
+                }
+            }
+
+            // Выполняем общую логику закрытия
+            PerformCloseApplicationLogic();
+
+            // Завершаем работу всего приложения
+            Debug.WriteLine("[MainWindow] Завершение работы приложения через Application.Current.Shutdown().");
+            Application.Current.Shutdown();
+        }
+
+        // Логика двойного клика по иконке в трее
+        private void MyNotifyIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("[MainWindow] Двойной клик по иконке в трее.");
+            ShowMainWindow(); // Показываем главное окно
         }
     }
 }

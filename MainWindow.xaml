@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:MySleepHelperApp.Views"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
         Title="Sleep Helper" 
         Width="600"
@@ -44,6 +45,11 @@
                                HorizontalAlignment="Left"/>
 
                     <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button x:Name="trayButton"
+                                Style="{StaticResource WindowControlButton}"
+                                Content="↓" 
+                                ToolTip="В трей"
+                                Click="TrayCloseButton_Click"/>
                         <Button x:Name="MinimizeButton"
                                 Style="{StaticResource WindowControlButton}"
                                 Content="_" 
@@ -110,5 +116,21 @@
         <!-- Декоративная рамка -->
         <Border BorderBrush="{StaticResource BorderGradient}"
                 BorderThickness="1"/>
+
+
+        <tb:TaskbarIcon x:Name="MyNotifyIcon"
+                        IconSource="pack://application:,,,/MySleepHelperApp;component/Styles/Assets/iconsleephelper.ico"
+                        ToolTipText="Sleep Helper"
+                        Visibility="Visible"
+                        TrayMouseDoubleClick="MyNotifyIcon_TrayMouseDoubleClick">
+
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Открыть" Name="MenuItem_Open" Click="MenuItem_Open_Click"/>
+                    <MenuItem Header="Закрыть" Name="MenuItem_Exit" Click="MenuItem_Exit_Click"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+        
     </Grid>
 </Window>
