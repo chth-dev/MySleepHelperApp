@@ -34,7 +34,6 @@ namespace MySleepHelperApp.Views
             _timerService.TimerUpdated += time => CountdownText.Text = time;
             _timerService.TimerFinished += () =>
             {
-                MessageBox.Show("Спокойной ночи.");
                 ResetUI();
                 _isTimerRunning = false;
                 UpdateButtonState();
