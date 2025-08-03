@@ -17,21 +17,21 @@
                       HorizontalScrollBarVisibility="Disabled">
 
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/> <!-- 0 Заголовок -->
-                <RowDefinition Height="Auto"/> <!-- 1 Строка с таймером -->
-                <RowDefinition Height="Auto"/> <!-- 2 Строка с яркостью и картинкой -->
-                <RowDefinition Height="Auto"/> <!-- 3 Строка с клавиатурой -->
-                <RowDefinition Height="Auto"/> 
-            </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- 0 Заголовок -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- 1 Строка с таймером -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- 2 Строка с яркостью и картинкой -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- 3 Строка с клавиатурой -->
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-        <!-- Фон на весь экран -->
-        <Grid.Background>
-            <StaticResource ResourceKey="WindowBackground"/>
-        </Grid.Background>
-        
-
-        <!--<Grid.ColumnDefinitions>
+                <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/> --><!-- Левый столбец --><!--
             <ColumnDefinition Width="auto"/> --><!-- Правый столбец --><!--
         </Grid.ColumnDefinitions>-->
@@ -187,14 +187,69 @@
                      </TextBlock>
 
                 </Grid>
-            
-                <!-- Картинка (правый столбец, строка 2) -->
-        <!--<Image Grid.Row="2" Grid.RowSpan="3" Grid.Column="1"
-               Source="{StaticResource HelpImage}"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Top"
-               Margin="10,0,0,5"
-               Width="100"/>-->
+
+                <Grid Grid.Row="5">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button 
+                     x:Name="GitButton"
+                     Grid.Row="0"
+                     Grid.Column="0"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Bottom"
+                     Margin="10"
+                     Style="{StaticResource PrimaryButton}"
+                     Height="40" 
+                     Width="200"
+                     FontSize="18"
+                     Padding="0" 
+                     Click="GitButton_Click">
+                    <TextBlock 
+                         Text="Страница Git" 
+                         TextWrapping="Wrap" 
+                         TextAlignment="Center" 
+                         FontFamily="Epilepsy Sans"/>
+                    </Button>
+
+                    <Button 
+                         x:Name="HelpButton"
+                         Grid.Row="1"
+                         Grid.Column="0"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Top"
+                         Margin="10"
+                         Style="{StaticResource PrimaryButton}"
+                         Height="40" 
+                         Width="200"
+                         FontSize="18"
+                         Padding="0" 
+                         Click="HelpButton_Click">
+                        <TextBlock 
+                             Text="Сообщить об ошибке" 
+                             TextWrapping="Wrap" 
+                             TextAlignment="Center" 
+                             FontFamily="Epilepsy Sans"/>
+                    </Button>
+
+                    <!-- Картинка -->
+                    <Image 
+                    Grid.Row="0" 
+                    Grid.RowSpan="2"
+                    Grid.Column="1"
+                    Source="{StaticResource HelpImage}"
+                    Margin="10,10,10,20"
+                    Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                </Grid>
 
             </Grid>
         </ScrollViewer>
