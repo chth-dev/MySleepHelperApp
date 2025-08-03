@@ -227,10 +227,12 @@ namespace MySleepHelperApp.Views
             if (totalSeconds <= 0)
             {
                 ResetUI();
-                CustomMessageBox.ShowDialog(
+
+                CustomMessageBox.CenteredShowDialog(
                     "Пожалуйста, введите время больше нуля, иначе таймер выключения не сможет работать \n:(",
                     "Предупреждение!",
-                    Window.GetWindow(this));
+                    this);
+
                 return;
             }
 
@@ -244,18 +246,18 @@ namespace MySleepHelperApp.Views
                 _isTimerRunning = true;
                 UpdateButtonState();
 
-                CustomMessageBox.ShowDialog(
+                CustomMessageBox.CenteredShowDialog(
                     "Таймер активирован. Компьютер будет выключен через заданное время.",
                     "Ура!",
-                    Window.GetWindow(this));
+                    this);
             }
             else
             {
                 // Ошибка: сбрасываем состояние
-                CustomMessageBox.ShowDialog(
+                CustomMessageBox.CenteredShowDialog(
                     "Не удалось запланировать выключение. Попробуйте перезапустить приложение от имени администратора.",
                     "Упс!",
-                    Window.GetWindow(this));
+                    this);
                 ResetUI();
             }
         }

@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace MySleepHelperApp.Views
 {
     public partial class CustomMessageBox : UserControl
@@ -52,7 +53,7 @@ namespace MySleepHelperApp.Views
                 TitleText.Text = title;
         }
 
-        public static bool? ShowDialog(string message, string title, Window? owner = null)
+        public static bool? ShowDialog(string message, string title, Window? owner = null, Point? centerPosition = null)
         {
             bool? result = null;
             var dialog = new CustomMessageBox();
@@ -67,6 +68,27 @@ namespace MySleepHelperApp.Views
                 Owner = owner,
                 Title = title,
             };
+
+            // Устанавливаем позиционирование
+            if (centerPosition.HasValue && owner != null)
+            {
+                window.WindowStartupLocation = WindowStartupLocation.Manual;
+
+                // Корректируем позицию с учетом размеров окна
+                window.Left = centerPosition.Value.X - window.Width / 2;
+                window.Top = centerPosition.Value.Y - window.Height / 2;
+
+                // Дополнительная проверка, чтобы окно не выходило за границы экрана
+                var screen = SystemParameters.WorkArea;
+                if (window.Left < screen.Left) window.Left = screen.Left;
+                if (window.Top < screen.Top) window.Top = screen.Top;
+                if (window.Left + window.Width > screen.Right) window.Left = screen.Right - window.Width;
+                if (window.Top + window.Height > screen.Bottom) window.Top = screen.Bottom - window.Height;
+            }
+            else
+            {
+                window.WindowStartupLocation = owner != null ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen;
+            }
 
             // Создаем команду, которая устанавливает результат и закрывает окно
             var command = new RelayCommand(() =>
@@ -87,7 +109,13 @@ namespace MySleepHelperApp.Views
             return result;
         }
 
-        public static bool? ShowYesNoDialog(string message, string title, Window? owner = null)
+        public static bool? CenteredShowDialog(string message, string title, FrameworkElement relativeTo)
+        {
+            var centerPoint = relativeTo.PointToScreen(new Point(relativeTo.ActualWidth / 2, relativeTo.ActualHeight / 2));
+            return ShowDialog(message, title, Window.GetWindow(relativeTo), centerPoint);
+        }
+
+        public static bool? ShowYesNoDialog(string message, string title, Window? owner = null, Point? centerPosition = null)
         {
             bool? result = null;
             var dialog = new CustomMessageBox();
@@ -102,6 +130,27 @@ namespace MySleepHelperApp.Views
                 Owner = owner,
                 Title = title
             };
+
+            // Устанавливаем позиционирование
+            if (centerPosition.HasValue && owner != null)
+            {
+                window.WindowStartupLocation = WindowStartupLocation.Manual;
+
+                // Корректируем позицию с учетом размеров окна
+                window.Left = centerPosition.Value.X - window.Width / 2;
+                window.Top = centerPosition.Value.Y - window.Height / 2;
+
+                // Дополнительная проверка, чтобы окно не выходило за границы экрана
+                var screen = SystemParameters.WorkArea;
+                if (window.Left < screen.Left) window.Left = screen.Left;
+                if (window.Top < screen.Top) window.Top = screen.Top;
+                if (window.Left + window.Width > screen.Right) window.Left = screen.Right - window.Width;
+                if (window.Top + window.Height > screen.Bottom) window.Top = screen.Bottom - window.Height;
+            }
+            else
+            {
+                window.WindowStartupLocation = owner != null ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen;
+            }
 
             // Команда для кнопки "Да"
             var yesCommand = new RelayCommand(() =>
@@ -129,6 +178,19 @@ namespace MySleepHelperApp.Views
 
             window.ShowDialog();
             return result;
+        }
+
+        public static bool? CenteredShowYesNoDialog(string message, string title, FrameworkElement relativeTo)
+        {
+
+            // Отладочная информация
+            Debug.WriteLine($"Element: {relativeTo.GetType().Name}");
+            Debug.WriteLine($"ActualWidth: {relativeTo.ActualWidth}, ActualHeight: {relativeTo.ActualHeight}");
+            Debug.WriteLine($"IsLoaded: {relativeTo.IsLoaded}");
+            Debug.WriteLine($"RenderSize: {relativeTo.RenderSize}");
+
+            var centerPoint = relativeTo.PointToScreen(new Point(relativeTo.ActualWidth / 2, relativeTo.ActualHeight / 2));
+            return ShowYesNoDialog(message, title, Window.GetWindow(relativeTo), centerPoint);
         }
 
         public static bool? ShowCustomDialog(

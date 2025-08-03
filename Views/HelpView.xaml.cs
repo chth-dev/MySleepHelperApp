@@ -15,11 +15,10 @@ namespace MySleepHelperApp.Views
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             // Сначала спрашиваем пользователя
-            var result = CustomMessageBox.ShowYesNoDialog(
+            var result = CustomMessageBox.CenteredShowYesNoDialog(
                 "Вы будете перенаправлены на страницу GitHub для создания обращения. Продолжить?",
                 "Переход к GitHub",
-                Window.GetWindow(this)
-            );
+                this);
 
             // Если пользователь нажал "Да"
             if (result == true)
@@ -36,11 +35,10 @@ namespace MySleepHelperApp.Views
                 catch
                 {
                     // Если не удалось открыть браузер - показываем ошибку
-                    CustomMessageBox.ShowDialog(
-                        $"Не удалось открыть браузер :(",
+                    CustomMessageBox.CenteredShowDialog(
+                        "Не удалось открыть браузер :(",
                         "Что-то пошло не так",
-                        Window.GetWindow(this)
-                    );
+                        this);
                 }
             }
             // Если пользователь нажал "Нет" - просто закрываем диалог, ничего дополнительно делать не нужно
@@ -49,11 +47,10 @@ namespace MySleepHelperApp.Views
         private void GitButton_Click(object sender, RoutedEventArgs e)
         {
             // Сначала спрашиваем пользователя
-            var result = CustomMessageBox.ShowYesNoDialog(
+            var result = CustomMessageBox.CenteredShowYesNoDialog(
                 "Вы будете перенаправлены на страницу GitHub проекта. Продолжить?",
                 "Переход к GitHub",
-                Window.GetWindow(this)
-            );
+                this);
 
             // Если пользователь нажал "Да"
             if (result == true)
@@ -70,11 +67,10 @@ namespace MySleepHelperApp.Views
                 catch
                 {
                     // Если не удалось открыть браузер - показываем ошибку
-                    CustomMessageBox.ShowDialog(
-                        $"Не удалось открыть браузер :(",
+                        CustomMessageBox.CenteredShowDialog(
+                        "Не удалось открыть браузер :(",
                         "Что-то пошло не так",
-                        Window.GetWindow(this)
-                    );
+                        this);
                 }
             }
             // Если пользователь нажал "Нет" - просто закрываем диалог

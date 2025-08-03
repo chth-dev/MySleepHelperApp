@@ -108,10 +108,10 @@ namespace MySleepHelperApp
         {
             if (AreCriticalFunctionsActive())
             {
-                var result = CustomMessageBox.ShowYesNoDialog(
+                var result = CustomMessageBox.CenteredShowYesNoDialog(
                     "При закрытии приложения функции таймера выключения, блокировки клавиатуры и регулировки яркости будут остановлены. Всё равно закрыть?",
                     "Предупреждение!",
-                    this);
+                    TabContent);
 
                 if (result != true)
                 {
@@ -209,10 +209,10 @@ namespace MySleepHelperApp
                 this.WindowState = WindowState.Normal;
                 this.Activate();
 
-                var result = CustomMessageBox.ShowYesNoDialog(
+                var result = CustomMessageBox.CenteredShowYesNoDialog(
                     "При закрытии приложения функции таймера выключения, блокировки клавиатуры и регулировки яркости будут остановлены. Всё равно закрыть?",
                     "Предупреждение!",
-                    this);
+                    TabContent);
 
                 if (result != true)
                 {
