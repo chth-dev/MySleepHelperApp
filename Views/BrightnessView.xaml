@@ -56,10 +56,10 @@
             Grid.RowSpan="2" 
             Grid.Column="1"
             Source="{StaticResource BrightnessImage}"
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Margin="18,18,18,0"
-            Width="auto"/>
+            Margin="0"
+            Width="150"/>
 
         <StackPanel 
             x:Name="BrightnessControlsPanel"
@@ -99,11 +99,10 @@
            Grid.Row="4" 
            Grid.Column="0"
            Grid.ColumnSpan="2"
-           FontSize="22" 
+           FontSize="20" 
            Margin="0"
-           Style="{StaticResource HelpTextBoxStyle}">
-           Ctrl  Alt  "+" - увеличить яркость<LineBreak/>
-           Ctrl  Alt  "-" - уменьшить яркость
+           Style="{StaticResource HelpTextBoxStyle}"
+           Text="Ctrl Alt &quot;-&quot; - уменьшить яркость  |  Ctrl Alt &quot;+&quot; - увеличить яркость">
         </TextBlock>
 
     </Grid>

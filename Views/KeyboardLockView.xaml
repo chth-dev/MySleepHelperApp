@@ -32,10 +32,11 @@
             x:Name="KeyboardActive"
             Grid.Row="2" 
             Grid.Column="0" 
-            Margin="10" 
+            Grid.ColumnSpan="2"
+            Margin="50,10" 
             Padding="5" 
             Height="60" 
-            Width="292"
+            Width="auto"
             VerticalAlignment="Top"
             Style="{StaticResource HelpBorderBoxStyle}">
             <Grid>
@@ -62,9 +63,8 @@
                    Grid.Column="1"
                    Text="Сейчас клавиатура активна" 
                    Style="{StaticResource HelpTextBoxStyle}"
-                   FontSize="20"
-                   TextWrapping="Wrap"
-                   Width="200" TextAlignment="Center"/>
+                   FontSize="22"
+                   TextAlignment="Center"/>
             </Grid>
         </Border>
 
@@ -129,12 +129,12 @@
 
         <Image 
             Grid.Row="0" 
-            Grid.RowSpan="3" 
+            Grid.RowSpan="2" 
             Grid.Column="1"
             Source="{StaticResource KeyboardLockImage}"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Margin="30"
+            Margin="25"
             Width="auto"/>
     </Grid>
 </UserControl>

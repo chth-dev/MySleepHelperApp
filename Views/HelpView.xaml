@@ -247,7 +247,7 @@
                     Grid.Column="1"
                     Source="{StaticResource HelpImage}"
                     Margin="10,10,10,20"
-                    Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                 </Grid>
 
