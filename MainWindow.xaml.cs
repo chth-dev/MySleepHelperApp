@@ -13,7 +13,7 @@ namespace MySleepHelperApp
         private TaskbarIcon notifyIcon;
         private HomeView _homeView;
         private ShutdownTimerView _shutdownTimerView;
-        private BrightnessView _brightnessView;
+        internal BrightnessView _brightnessView;
         private KeyboardLockView _keyboardView;
         private HelpView _helpView;
 

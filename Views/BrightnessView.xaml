@@ -11,6 +11,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -57,7 +58,7 @@
             Source="{StaticResource BrightnessImage}"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Margin="20,20,20,0"
+            Margin="18,18,18,0"
             Width="auto"/>
 
         <StackPanel 
@@ -65,7 +66,7 @@
             Grid.Row="2" 
             Grid.Column="0" 
             Grid.ColumnSpan="2"
-            Margin="0,0,0,10"
+            Margin="0,0,0,5"
             VerticalAlignment="Center"
             Orientation="Vertical"
             Opacity="0.5" 
@@ -90,9 +91,20 @@
                 Width="auto"
                 Height="auto"
                 Margin="10"
-                ValueChanged="BrightnessSlider_ValueChanged"/>
-            
+                ValueChanged="BrightnessSlider_ValueChanged"
+                x:FieldModifier="public"/>
         </StackPanel>
+
+        <TextBlock 
+           Grid.Row="4" 
+           Grid.Column="0"
+           Grid.ColumnSpan="2"
+           FontSize="22" 
+           Margin="0"
+           Style="{StaticResource HelpTextBoxStyle}">
+           Ctrl  Alt  "+" - увеличить яркость<LineBreak/>
+           Ctrl  Alt  "-" - уменьшить яркость
+        </TextBlock>
 
     </Grid>
 </UserControl>
