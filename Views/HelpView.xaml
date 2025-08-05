@@ -31,12 +31,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/> --><!-- Левый столбец --><!--
-            <ColumnDefinition Width="auto"/> --><!-- Правый столбец --><!--
-        </Grid.ColumnDefinitions>-->
-
-        <!-- Заголовок -->
+                <!-- Заголовок -->
         <TextBlock Grid.Row="0" 
                    Text="Возможности My Sleep Helper"
                    Style="{StaticResource HeaderTextStyle}"
@@ -217,7 +212,8 @@
                          Text="Страница Git" 
                          TextWrapping="Wrap" 
                          TextAlignment="Center" 
-                         FontFamily="Epilepsy Sans"/>
+                         Style="{StaticResource HeaderTextStyle}"
+                         FontSize="20"/>
                     </Button>
 
                     <Button 
@@ -237,7 +233,8 @@
                              Text="Сообщить об ошибке" 
                              TextWrapping="Wrap" 
                              TextAlignment="Center" 
-                             FontFamily="Epilepsy Sans"/>
+                             Style="{StaticResource HeaderTextStyle}"
+                             FontSize="18"/>
                     </Button>
 
                     <!-- Картинка -->

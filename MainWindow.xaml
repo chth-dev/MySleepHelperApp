@@ -131,6 +131,6 @@
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
-        
+
     </Grid>
 </Window>

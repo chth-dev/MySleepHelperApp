@@ -29,7 +29,7 @@
                    Style="{StaticResource HeaderTextStyle}"
                    Text="Предупреждение!" 
                    FontSize="28"
-                   Margin="5"
+                   Margin="5,2,5,2"
                    VerticalAlignment="Bottom"/>
 
             <!-- Сообщение -->
@@ -38,8 +38,8 @@
                    Grid.Row="1"
                    Style="{StaticResource HelpTextBoxStyle}"
                    TextWrapping="Wrap"
-                   Margin="20,5"
-                   FontSize="26"
+                   Margin="15,5"
+                   FontSize="24"
                    Text="Какой то текст, Какой то текст, Какой то текст!"/>
 
             <ItemsControl 
@@ -58,14 +58,11 @@
                 <!-- 2. Шаблон для каждой кнопки -->
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Content="{Binding Text}" 
-                    Command="{Binding Command}"
-                    Style="{StaticResource PrimaryButton}"
-                    Margin="10"
-                    FontSize="20"
-                    Focusable="True"
-                    IsDefault="True"
-                    IsCancel="True" />
+                <Button Content="{Binding Text}" 
+                Command="{Binding Command}"
+                Style="{StaticResource SimpleDialogButton}"
+                Margin="10,0"
+                Focusable="True"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

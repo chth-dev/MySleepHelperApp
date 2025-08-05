@@ -39,12 +39,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Fonts\EpilepsySans.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Fonts\EpilepsySansBold.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="Fonts\EpilepsySans.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\EpilepsySansBold.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Styles\Assets\brightness_icon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

@@ -82,7 +82,6 @@
         <Setter Property="BorderBrush" Value="{StaticResource BorderGradient}"/>
         <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
         <Setter Property="BorderThickness" Value="3"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Padding" Value="15,5"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -91,7 +90,7 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="4"
+                        CornerRadius="0"
                         Padding="{TemplateBinding Padding}">
                         <ContentPresenter HorizontalAlignment="Center"
                                       VerticalAlignment="Center"/>
@@ -119,7 +118,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="MaxLength" Value="2"/>
-        <Setter Property="FontFamily" Value="Epilepsy Sans"/>
+        <Setter Property="FontFamily" Value="{DynamicResource MainBoldFont}"/>
         <!-- Цвет рамки при фокусе -->
         <Setter Property="Template">
             <Setter.Value>
@@ -144,7 +143,7 @@
 
     <!-- 9. СТИЛЬ ЗАГОЛОВКОВ -->
     <Style x:Key="HeaderTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Epilepsy Sans"/>
+        <Setter Property="FontFamily" Value="{DynamicResource MainBoldFont}"/>
         <Setter Property="Foreground" Value="{StaticResource MediumPurple}"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -165,7 +164,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource DarkPurple}"/>
-        <Setter Property="FontFamily" Value="Epilepsy Sans"/>
+        <Setter Property="FontFamily" Value="{DynamicResource MainFont}"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Padding" Value="15,10"/>
@@ -216,7 +215,7 @@
         <!-- Наследуем цветовую схему главного окна -->
         <Setter Property="Background" Value="{StaticResource WindowBackground}"/>
         <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
-        <Setter Property="FontFamily" Value="Epilepsy Sans"/>
+        <Setter Property="FontFamily" Value="{DynamicResource MainFont}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderGradient}"/>
     </Style>
 
@@ -231,7 +230,7 @@
 
     <!-- 14. Стиль текста в блоках справки -->
     <Style x:Key="HelpTextBoxStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Epilepsy Sans"/>
+        <Setter Property="FontFamily" Value="{DynamicResource MainFont}"/>
         <Setter Property="Foreground" Value="{StaticResource MediumPurple}"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -264,7 +263,7 @@
                                         <ControlTemplate>
                                             <Border 
                                             Background="{TemplateBinding Background}"
-                                            CornerRadius="4"/>
+                                            CornerRadius="0"/>
                                         </ControlTemplate>
                                     </RepeatButton.Template>
                                 </RepeatButton>
@@ -280,7 +279,7 @@
                                         <ControlTemplate>
                                             <Border 
                                             Background="{TemplateBinding Background}"
-                                            CornerRadius="4"/>
+                                            CornerRadius="0"/>
                                         </ControlTemplate>
                                     </RepeatButton.Template>
                                 </RepeatButton>
@@ -291,12 +290,12 @@
                                 <Thumb>
                                     <Thumb.Template>
                                         <ControlTemplate>
-                                            <Ellipse 
-                                            Fill="{StaticResource AccentBrush}"
-                                            Stroke="{StaticResource DarkPurple}"
-                                            StrokeThickness="2"
-                                            Width="18"
-                                            Height="18"/>
+                                            <Border 
+                                                Background="{StaticResource LightPurple}"
+                                                BorderBrush="{StaticResource DarkPurple}"
+                                                BorderThickness="2"
+                                                Width="18"
+                                                Height="18"/>
                                         </ControlTemplate>
                                     </Thumb.Template>
                                 </Thumb>
@@ -308,6 +307,63 @@
         </Setter>
     </Style>
 
+    <!-- 16. Стиль для кнопок OK/Да/Нет в ShowBox -->
+    <Style x:Key="SimpleDialogButton" TargetType="Button">
+        <!-- Текстовые свойства -->
+        <Setter Property="FontFamily" Value="{DynamicResource MainBoldFont}"/>
+        <Setter Property="Foreground" Value="{StaticResource MediumPurple}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+
+        <!-- Размеры и отступы -->
+        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="Margin" Value="10,0"/>
+        <Setter Property="FontSize" Value="20"/>
+
+        <!-- Цвета и рамка -->
+        <Setter Property="Background" Value="#FFE6D9F9"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderGradient}"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Cursor" Value="Hand"/>
+
+        <!-- Шаблон кнопки -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <!-- Основной контейнер -->
+                        <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="0"
+                            Padding="{TemplateBinding Padding}">
+                            <ContentPresenter x:Name="contentPresenter"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+
+                        <!-- Дополнительный элемент для подчеркивания -->
+                        <Border x:Name="underline"
+                            Height="1"
+                            Background="Transparent"
+                            VerticalAlignment="Bottom"
+                            Margin="0,-2,0,0"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <!-- Эффекты при наведении -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{StaticResource DarkPurple}"/>
+                            <Setter TargetName="underline" Property="Background" Value="{StaticResource DarkPurple}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <!-- 17. Стиль для ScrollBar Thumb (ползунка) -->
     <!-- Ретро-стиль для ScrollBar Thumb (ползунка) -->
@@ -403,6 +459,5 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
 
 </ResourceDictionary>

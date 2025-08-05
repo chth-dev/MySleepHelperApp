@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
-using MySleepHelperApp.Views;
 using MySleepHelperApp.Services;
+using MySleepHelperApp.Views;
+using System.Windows.Media;
 
 namespace MySleepHelperApp
 {
@@ -12,7 +14,10 @@ namespace MySleepHelperApp
         // --- Поля для хранения ссылок ---
         private MainWindow _mainWindow; // Ссылка на ЕДИНСТВЕННЫЙ экземпляр MainWindow
         private HwndSource _hwndSource;
-        private FontService _fontService; // Ссылка на сервис шрифтов
+
+
+        // Публичное свойство для доступа к FontService из любого места приложения
+        public static FontService FontService { get; private set; }
 
         // --- Импорты Win32 API ---
         [DllImport("user32.dll")]
@@ -35,8 +40,13 @@ namespace MySleepHelperApp
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            // Инициализация сервиса шрифтов
-            _fontService = new FontService();
+            // Инициализация FontService
+            FontService = new FontService();
+
+            // Проверка загрузки шрифтов
+            Debug.WriteLine($"Шрифты загружены. Regular: {FontService.RegularFont.Source}, Bold: {FontService.BoldFont.Source}");
+
+
 
             // 1. Создаём ЕДИНСТВЕННЫЙ экземпляр главного окна
             _mainWindow = new MainWindow();

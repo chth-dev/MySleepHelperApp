@@ -1,79 +1,61 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using System.Drawing.Text;
-using System.IO;
 using System.Diagnostics;
+using System.Windows.Media; // Для FontFamily
+using System.Collections.Generic;
+using System.Reflection; // Для получения информации о сборке
 
 namespace MySleepHelperApp.Services
 {
     public class FontService
     {
-        private PrivateFontCollection _privateFonts;
-        private string _fontsDirectory;
+        public FontFamily RegularFont { get; }
+        public FontFamily BoldFont { get; }
 
-        // Конструктор
         public FontService()
-        {
-            // Инициализируем коллекцию приватных шрифтов
-            _privateFonts = new PrivateFontCollection();
-
-            // Получаем путь к папке шрифтов
-            _fontsDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Fonts");
-
-            // Загружаем шрифты
-            LoadFonts();
-        }
-
-        // Метод для загрузки шрифтов
-        private void LoadFonts()
         {
             try
             {
-                if (Directory.Exists(_fontsDirectory))
-                {
-                    // Получаем список файлов шрифтов в папке
-                    string[] fontFiles = Directory.GetFiles(_fontsDirectory, "*.ttf");
-
-                    // Загружаем каждый шрифт
-                    foreach (string fontFile in fontFiles)
-                    {
-                        _privateFonts.AddFontFile(fontFile);
-                        Debug.WriteLine($"Загружен шрифт: {Path.GetFileName(fontFile)}");
-                    }
-                }
-                else
-                {
-                    Debug.WriteLine("Папка со шрифтами не найдена.");
-                }
+                // Упрощенная загрузка шрифтов
+                RegularFont = LoadFont("EpilepsySans.ttf");
+                BoldFont = LoadFont("EpilepsySansBold.ttf");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Ошибка при загрузке шрифтов: {ex.Message}");
+                Debug.WriteLine($"Ошибка загрузки шрифтов: {ex}");
+                // Fallback шрифты
+                RegularFont = new FontFamily("Arial");
+                BoldFont = new FontFamily("Arial");
             }
         }
 
-        // Метод для получения шрифта по индексу
-        public Font GetFont(int index = 0, float size = 12)
+        private FontFamily LoadFont(string fileName)
         {
-            if (_privateFonts != null && _privateFonts.Families.Length > index)
+            try
             {
-                return new Font(_privateFonts.Families[index], size);
+                // Способ 1: Простая загрузка (чаще всего работает)
+                var font = new FontFamily(new Uri("pack://application:,,,/"), $"./Fonts/#Epilepsy Sans");
+                Debug.WriteLine($"Успешно загружен шрифт: {fileName}");
+                return font;
             }
-            Debug.WriteLine("Шрифт не найден, возвращаем стандартный шрифт");
-            return SystemFonts.DefaultFont; // Если шрифт не найден, возвращаем стандартный шрифт
+            catch
+            {
+                // Способ 2: Альтернативная загрузка
+                try
+                {
+                    var font = new FontFamily(new Uri($"pack://application:,,,/Fonts/{fileName}"), "./#Epilepsy Sans");
+                    Debug.WriteLine($"Успешно загружен шрифт (альтернативный способ): {fileName}");
+                    return font;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Ошибка загрузки шрифта {fileName}: {ex.Message}");
+                    throw;
+                }
+            }
         }
 
-        // Метод для получения всех доступных шрифтов
-        public FontFamily[] GetFontFamilies()
-        {
-            return _privateFonts?.Families ?? Array.Empty<FontFamily>();
-        }
-
-        // Количество загруженных шрифтов
-        public int FontCount => _privateFonts?.Families.Length ?? 0;
+        // Для обратной совместимости
+        public FontFamily GetFontFamily(int index = 0) => index == 0 ? RegularFont : BoldFont;
+        public int FontCount => 2; // Теперь у нас всегда 2 шрифта
     }
 }

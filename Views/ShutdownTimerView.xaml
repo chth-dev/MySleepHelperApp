@@ -60,13 +60,13 @@
                              LostFocus="TextBox_LostFocus"/>
                                 <TextBlock x:Name="HoursTextBoxPlaceholder"
                                Text="00"
-                               FontSize="26"
+                               FontSize="30"
                                Opacity="0.4"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                IsHitTestVisible="False" 
                                FontWeight="Bold" 
-                               FontFamily="Epilepsy Sans"/>
+                               Style="{StaticResource HeaderTextStyle}"/>
                             </Grid>
                         </StackPanel>
 
@@ -85,13 +85,13 @@
                              LostFocus="TextBox_LostFocus"/>
                                 <TextBlock x:Name="MinutesTextBoxPlaceholder"
                                Text="00"
-                               FontSize="26"
+                               FontSize="30"
                                Opacity="0.4"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                IsHitTestVisible="False" 
                                FontWeight="Bold" 
-                               FontFamily="Epilepsy Sans"/>
+                               Style="{StaticResource HeaderTextStyle}"/>
                             </Grid>
                         </StackPanel>
 
@@ -109,14 +109,14 @@
                              GotFocus="TextBox_GotFocus"
                              LostFocus="TextBox_LostFocus"/>
                                 <TextBlock x:Name="SecondsTextBoxPlaceholder"
+                               Style="{StaticResource HeaderTextStyle}"
                                Text="00"
-                               FontSize="26"
+                               FontSize="30"
                                Opacity="0.4"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                IsHitTestVisible="False" 
-                               FontWeight="Bold" 
-                               FontFamily="Epilepsy Sans"/>
+                               FontWeight="Bold"/>
                             </Grid>
                         </StackPanel>
                     </UniformGrid>
@@ -151,14 +151,14 @@
                 Style="{StaticResource PrimaryButton}"
                 Height="60" 
                 Width="240"
-                FontSize="18"
-                Padding="10">
+                Padding="5">
                 <TextBlock 
                     x:Name="ButtonText"
                     Text="Запланировать выключение компьютера" 
                     TextWrapping="Wrap" 
                     TextAlignment="Center" 
-                    FontFamily="Epilepsy Sans"/>
+                    Style="{StaticResource HeaderTextStyle}"
+                    FontSize="18"/>
             </Button>
         </Grid>
 

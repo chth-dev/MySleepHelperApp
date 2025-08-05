@@ -63,7 +63,7 @@
                    Grid.Column="1"
                    Text="Сейчас клавиатура активна" 
                    Style="{StaticResource HelpTextBoxStyle}"
-                   FontSize="22"
+                   FontSize="20"
                    TextAlignment="Center"/>
             </Grid>
         </Border>
@@ -124,7 +124,8 @@
                 Text="Заблокировать" 
                 TextWrapping="Wrap" 
                 TextAlignment="Center" 
-                FontFamily="Epilepsy Sans"/>
+                Style="{StaticResource HeaderTextStyle}"
+                FontSize="20"/>
         </Button>
 
         <Image 
