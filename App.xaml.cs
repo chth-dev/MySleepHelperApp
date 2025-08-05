@@ -2,12 +2,18 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
-using MySleepHelperApp.Views; // Для MainWindow и BrightnessView
+using MySleepHelperApp.Views;
+using MySleepHelperApp.Services;
 
 namespace MySleepHelperApp
 {
     public partial class App : Application
     {
+        // --- Поля для хранения ссылок ---
+        private MainWindow _mainWindow; // Ссылка на ЕДИНСТВЕННЫЙ экземпляр MainWindow
+        private HwndSource _hwndSource;
+        private FontService _fontService; // Ссылка на сервис шрифтов
+
         // --- Импорты Win32 API ---
         [DllImport("user32.dll")]
         private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
@@ -27,12 +33,11 @@ namespace MySleepHelperApp
         private const uint VK_OEM_PLUS = 0xBB;  // Клавиша "+"
         private const uint VK_OEM_MINUS = 0xBD; // Клавиша "-"
 
-        // --- Поля для хранения ссылок ---
-        private MainWindow _mainWindow; // Ссылка на ЕДИНСТВЕННЫЙ экземпляр MainWindow
-        private HwndSource _hwndSource;
-
         protected override void OnStartup(StartupEventArgs e)
         {
+            // Инициализация сервиса шрифтов
+            _fontService = new FontService();
+
             // 1. Создаём ЕДИНСТВЕННЫЙ экземпляр главного окна
             _mainWindow = new MainWindow();
 

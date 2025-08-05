@@ -99,7 +99,7 @@
            Grid.Row="4" 
            Grid.Column="0"
            Grid.ColumnSpan="2"
-           FontSize="20" 
+           FontSize="18" 
            Margin="0"
            Style="{StaticResource HelpTextBoxStyle}"
            Text="Ctrl Alt &quot;-&quot; - уменьшить яркость  |  Ctrl Alt &quot;+&quot; - увеличить яркость">

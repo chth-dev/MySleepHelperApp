@@ -15,7 +15,6 @@
   <ItemGroup>
     <None Remove="Fonts\EpilepsySans.ttf" />
     <None Remove="Fonts\EpilepsySansBold.ttf" />
-    <None Remove="Fonts\Pixeboy-z8XGD.ttf" />
     <None Remove="Styles\Assets\brightness_icon.png" />
     <None Remove="Styles\Assets\cat_brightness.png" />
     <None Remove="Styles\Assets\cat_help.png" />
@@ -32,9 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Fonts\Pixeboy-z8XGD.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="iconsleephelper.ico" />
   </ItemGroup>
 

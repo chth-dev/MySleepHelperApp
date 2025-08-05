@@ -132,8 +132,8 @@
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center"
                        x:Name="CountdownText"
-                       Style="{StaticResource TimerTextStyle}"
-                       FontSize="75"
+                       Style="{StaticResource HeaderTextStyle}"
+                       FontSize="80"
                        Text="00:00:00"
                        TextAlignment="Center" 
                        FontWeight="Bold"/>
