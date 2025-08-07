@@ -69,14 +69,16 @@
                 <TextBlock Grid.Row="1" 
                            Grid.Column="2" 
                            Grid.ColumnSpan="2"
-                           Text="Автоматическое выключение компьютера через указанное время. &#10;Максимум - 23 часа, 59 минут, 59 секунд." 
                            FontSize="18" 
                            Margin="10"
                            TextWrapping="Wrap"
                            Width="350"
                            Style="{StaticResource HelpTextBoxStyle}" 
-                           TextAlignment="Center"/>
-            </Grid>
+                           TextAlignment="Center">
+                           Автоматическое выключение компьютера через указанное время.<LineBreak/><LineBreak/>
+                           Максимум - 23 часа, 59 минут, 59 секунд.
+                </TextBlock>
+             </Grid>
         </Border>
 
         <!-- Блок 2: Регулировка яркости -->
@@ -106,13 +108,19 @@
                            FontSize="22"
                            Margin="10,10,10,5"/>
 
-                <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
-                           Text="Уменьшение яркости экрана монитора для комфортного засыпания. &#10;(Важно! Не работает для контекстных окон Windows и полноэкранных игр)." 
+                <TextBlock Grid.Row="1" Grid.Column="1" 
+                           Grid.ColumnSpan="2"
                            FontSize="18" Margin="10"
                            TextWrapping="Wrap"
                            Width="350"
-                           Style="{StaticResource HelpTextBoxStyle}" TextAlignment="Center"/>
-            </Grid>
+                           Style="{StaticResource HelpTextBoxStyle}" TextAlignment="Center">
+                           Уменьшение яркости экрана монитора для комфортного засыпания.<LineBreak/><LineBreak/>
+                           Важно! Не работает для контекстных окон Windows и полноэкранных игр.<LineBreak/><LineBreak/>
+                           Горячие клавиши:<LineBreak/>
+                           Ctrl Alt "-" - уменьшить яркость<LineBreak/>
+                           Ctrl Alt "+" - увеличить яркость
+                        </TextBlock>
+                    </Grid>
         </Border>
 
         <!-- Блок 3: Блокировка клавиатуры -->
@@ -142,13 +150,17 @@
                            FontSize="22"
                            Margin="10,10,10,5"/>
 
-                <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
-                           Text="Отключение клавиатуры для защиты от случайных нажатий. Например, котиками." 
+                        <TextBlock Grid.Row="1" Grid.Column="1" 
+                           Grid.ColumnSpan="2"
                            FontSize="18" Margin="10"
                            TextWrapping="Wrap"
                            Width="350"
-                           Style="{StaticResource HelpTextBoxStyle}" TextAlignment="Center"/>
-            </Grid>
+                           Style="{StaticResource HelpTextBoxStyle}" 
+                           TextAlignment="Center">
+                           Отключение клавиатуры для защиты от случайных нажатий. Например, котиками.<LineBreak/><LineBreak/>
+                           Сочетание клавиш Ctrl + Alt + Del - остается активным.
+                        </TextBlock>
+                    </Grid>
         </Border>
 
         <!-- Заголовок  -->
