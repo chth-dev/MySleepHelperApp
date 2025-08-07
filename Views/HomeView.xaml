@@ -9,9 +9,7 @@
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Заголовок -->
             <RowDefinition Height="*"/>
-            <!-- Основное содержимое -->
         </Grid.RowDefinitions>
 
         <!-- Заголовок -->

@@ -67,6 +67,7 @@
             <!-- 2. Панель вкладок -->
             <Border DockPanel.Dock="Top" 
                     Style="{StaticResource TabsContainerStyle}">
+                
                 <UniformGrid Rows="1" HorizontalAlignment="Stretch">
                     <!-- Вкладка "Домой" -->
                     <RadioButton x:Name="HomeTab" 

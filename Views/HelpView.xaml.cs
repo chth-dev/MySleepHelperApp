@@ -36,7 +36,7 @@ namespace MySleepHelperApp.Views
                 {
                     // Если не удалось открыть браузер - показываем ошибку
                     CustomMessageBox.CenteredShowDialog(
-                        "Не удалось открыть браузер :(",
+                        "Не удалось перейти на страницу Git :(",
                         "Что-то пошло не так",
                         this);
                 }
@@ -48,7 +48,7 @@ namespace MySleepHelperApp.Views
         {
             // Сначала спрашиваем пользователя
             var result = CustomMessageBox.CenteredShowYesNoDialog(
-                "Вы будете перенаправлены на страницу GitHub проекта. Продолжить?",
+                "Вы будете перенаправлены на GitHub страницу проекта. Продолжить?",
                 "Переход к GitHub",
                 this);
 
@@ -57,7 +57,7 @@ namespace MySleepHelperApp.Views
             {
                 try
                 {
-                    // Открываем страницу вашего GitHub репозитория
+                    // Открываем страницу GitHub репозитория
                     Process.Start(new ProcessStartInfo
                     {
                         FileName = "https://github.com/chth-dev/MySleepHelperApp",
@@ -68,7 +68,7 @@ namespace MySleepHelperApp.Views
                 {
                     // Если не удалось открыть браузер - показываем ошибку
                         CustomMessageBox.CenteredShowDialog(
-                        "Не удалось открыть браузер :(",
+                        "Не удалось перейти на страницу Git :(",
                         "Что-то пошло не так",
                         this);
                 }

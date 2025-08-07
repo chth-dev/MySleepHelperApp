@@ -4,18 +4,20 @@
              xmlns:local="clr-namespace:MySleepHelperApp">
 
     <Application.Resources>
+        
         <!-- Объединяем все ресурсы в один словарь -->
         <ResourceDictionary>
 
             <FontFamily x:Key="MainFont">pack://application:,,,/Fonts/EpilepsySans.ttf#Epilepsy Sans</FontFamily>
             <FontFamily x:Key="MainBoldFont">pack://application:,,,/Fonts/EpilepsySansBold.ttf#Epilepsy Sans</FontFamily>
 
-            
             <!-- Подключаем дополнительные словари -->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/MainStyles.xaml"/>
                 <ResourceDictionary Source="Styles/Icons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

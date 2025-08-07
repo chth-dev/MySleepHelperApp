@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 
@@ -32,7 +30,7 @@ namespace MySleepHelperApp.Views
         // Метод для форматирования имени пользователя
         private static string FormatUserName(string name)
         {
-            // Если имя пустое, возвращаем "Гость"
+            // Если имя пустое, возвращаем "друг"
             if (string.IsNullOrEmpty(name))
                 return "друг";
 

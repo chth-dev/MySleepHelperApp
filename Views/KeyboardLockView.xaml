@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:MySleepHelperApp.Views"
              mc:Ignorable="d" 
              Background="Transparent">
+    
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -89,19 +90,21 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Grid.Row="0" 
-           Source="{StaticResource CrossIcon}"
-           Width="32" Height="32"
-           HorizontalAlignment="Center"
-           VerticalAlignment="Center"
-           Margin="10, 5"/>
+            <Image 
+                Grid.Row="0" 
+                Source="{StaticResource CrossIcon}"
+                Width="32" Height="32"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="10, 5"/>
 
-                <TextBlock Grid.Column="1"
-           Text="Сейчас клавиатура не активна" 
-           Style="{StaticResource HelpTextBoxStyle}"
-           FontSize="20"
-           TextWrapping="Wrap"
-           Width="200" TextAlignment="Center"/>
+            <TextBlock 
+                Grid.Column="1"
+                Text="Сейчас клавиатура не активна" 
+                Style="{StaticResource HelpTextBoxStyle}"
+                FontSize="20"
+                TextWrapping="Wrap"
+                Width="200" TextAlignment="Center"/>
             </Grid>
         </Border>
 
@@ -137,5 +140,6 @@
             VerticalAlignment="Center"
             Margin="25"
             Width="auto"/>
+        
     </Grid>
 </UserControl>

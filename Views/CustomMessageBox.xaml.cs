@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 
 namespace MySleepHelperApp.Views
@@ -32,7 +21,7 @@ namespace MySleepHelperApp.Views
         {
             public required string Text { get; set; }          // Текст кнопки
             public required ICommand Command { get; set; }     // Команда при нажатии
-            public object? Result { get; set; }        // Результат (если нужно)
+            public object? Result { get; set; }                // Результат (если нужно)
         }
 
         public void Show(string message, string? title = null, MessageBoxButton[]? buttons = null)
@@ -60,8 +49,8 @@ namespace MySleepHelperApp.Views
             var window = new Window
             {
                 Content = dialog,
-                Width = 400,                           // ← Точный размер ширины
-                Height = 300,                          // ← Точный размер высоты
+                Width = 400,                           // Точный размер ширины
+                Height = 300,                          // Точный размер высоты
                 WindowStartupLocation = owner != null ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen,
                 ResizeMode = ResizeMode.NoResize,      // Запрещаем изменение размера
                 WindowStyle = WindowStyle.None,        // Убираем стандартную рамку

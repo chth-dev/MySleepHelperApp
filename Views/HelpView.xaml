@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
 
-    <!-- Главный Grid, который занимает всё пространство UserControl'а -->
     <Grid>
         <!-- Фон на весь экран -->
         <Grid.Background>
@@ -19,25 +18,22 @@
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <!-- 0 Заголовок -->
                     <RowDefinition Height="Auto"/>
-                    <!-- 1 Строка с таймером -->
                     <RowDefinition Height="Auto"/>
-                    <!-- 2 Строка с яркостью и картинкой -->
                     <RowDefinition Height="Auto"/>
-                    <!-- 3 Строка с клавиатурой -->
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!-- Заголовок -->
-        <TextBlock Grid.Row="0" 
-                   Text="Возможности My Sleep Helper"
-                   Style="{StaticResource HeaderTextStyle}"
-                   FontSize="26"
-                   Margin="20,20,20,15"
-                   HorizontalAlignment="Center"/>
+         <!-- Заголовок -->
+        <TextBlock 
+            Grid.Row="0" 
+            Text="Возможности My Sleep Helper"
+            Style="{StaticResource HeaderTextStyle}"
+            FontSize="26"
+            Margin="20,20,20,15"
+            HorizontalAlignment="Center"/>
 
         <!-- Блок 1: Таймер выключения  -->
         <Border 
@@ -47,13 +43,13 @@
             Style="{StaticResource HelpBorderBoxStyle}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/> <!-- Иконка + название -->
-                    <RowDefinition Height="Auto"/> <!-- Описание -->
+                    <RowDefinition Height="Auto"/> 
+                    <RowDefinition Height="Auto"/> 
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/> <!-- Иконка -->
-                    <ColumnDefinition Width="*"/> <!-- Текст -->
+                    <ColumnDefinition Width="auto"/> 
+                    <ColumnDefinition Width="*"/> 
                 </Grid.ColumnDefinitions>
 
                 <Image Grid.Row="0" 
@@ -73,12 +69,13 @@
                 <TextBlock Grid.Row="1" 
                            Grid.Column="2" 
                            Grid.ColumnSpan="2"
-                           Text="Автоматическое выключение компьютера через указанное время. Максимум - 23 часа, 59 минут, 59 секунд." 
+                           Text="Автоматическое выключение компьютера через указанное время. &#10;Максимум - 23 часа, 59 минут, 59 секунд." 
                            FontSize="18" 
                            Margin="10"
                            TextWrapping="Wrap"
                            Width="350"
-                           Style="{StaticResource HelpTextBoxStyle}" TextAlignment="Center"/>
+                           Style="{StaticResource HelpTextBoxStyle}" 
+                           TextAlignment="Center"/>
             </Grid>
         </Border>
 
@@ -110,7 +107,7 @@
                            Margin="10,10,10,5"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
-                           Text="Уменьшение яркости экрана монитора для комфортного засыпания." 
+                           Text="Уменьшение яркости экрана монитора для комфортного засыпания. &#10;(Важно! Не работает для контекстных окон Windows и полноэкранных игр)." 
                            FontSize="18" Margin="10"
                            TextWrapping="Wrap"
                            Width="350"
@@ -156,7 +153,6 @@
 
         <!-- Заголовок  -->
                 <Grid Grid.Row="4">
-                    
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -179,8 +175,7 @@
                        Style="{StaticResource HelpTextBoxStyle}">
                        Версия приложения: 1.0<LineBreak/>
                        Разработчик: chth
-                     </TextBlock>
-
+                    </TextBlock>
                 </Grid>
 
                 <Grid Grid.Row="5">
@@ -196,18 +191,18 @@
                     </Grid.ColumnDefinitions>
 
                     <Button 
-                     x:Name="GitButton"
-                     Grid.Row="0"
-                     Grid.Column="0"
-                     HorizontalAlignment="Right"
-                     VerticalAlignment="Bottom"
-                     Margin="10"
-                     Style="{StaticResource PrimaryButton}"
-                     Height="40" 
-                     Width="200"
-                     FontSize="18"
-                     Padding="0" 
-                     Click="GitButton_Click">
+                         x:Name="GitButton"
+                         Grid.Row="0"
+                         Grid.Column="0"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Bottom"
+                         Margin="10"
+                         Style="{StaticResource PrimaryButton}"
+                         Height="40" 
+                         Width="200"
+                         FontSize="18"
+                         Padding="0" 
+                         Click="GitButton_Click">
                     <TextBlock 
                          Text="Страница Git" 
                          TextWrapping="Wrap" 
@@ -244,8 +239,9 @@
                     Grid.Column="1"
                     Source="{StaticResource HelpImage}"
                     Margin="10,10,10,20"
-                    Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+                    Width="160" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
                 </Grid>
 
             </Grid>

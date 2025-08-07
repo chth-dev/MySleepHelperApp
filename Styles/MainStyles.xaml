@@ -65,7 +65,6 @@
                                     VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <!-- Только рамка при наведении -->
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
                         </Trigger>
@@ -77,7 +76,6 @@
 
     <!-- 7. СТИЛЬ ОСНОВНЫХ КНОПОК -->
     <Style x:Key="PrimaryButton" TargetType="Button">
-        <!-- Основные свойства -->
         <Setter Property="Background" Value="{StaticResource ButtonColor}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderGradient}"/>
         <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
@@ -93,10 +91,9 @@
                         CornerRadius="0"
                         Padding="{TemplateBinding Padding}">
                         <ContentPresenter HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"/>
+                                          VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <!-- Триггеры внутри шаблона -->
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
                             <Setter TargetName="border" Property="BorderThickness" Value="3"/>
@@ -119,7 +116,6 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="MaxLength" Value="2"/>
         <Setter Property="FontFamily" Value="{DynamicResource MainBoldFont}"/>
-        <!-- Цвет рамки при фокусе -->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -150,16 +146,15 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    <!-- 10. Стиль контейнера вкладок -->
+    <!-- 10. СТИЛЬ КОНТЕЙНЕРА ВКЛАДОК -->
     <Style x:Key="TabsContainerStyle" TargetType="Border">
         <Setter Property="Background" Value="{StaticResource LightPurple}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderGradient}"/>
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
-        <!-- Только нижняя граница -->
         <Setter Property="Padding" Value="0"/>
     </Style>
 
-    <!-- 11. Стиль кнопки-вкладки с иконкой -->
+    <!-- 11. СТИЛЬ КНОПКИ_ВКЛАДКИ С ИКОНКОЙ -->
     <Style x:Key="TabButtonStyle" TargetType="RadioButton">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -174,7 +169,6 @@
                     <Border x:Name="border"
                         Background="{TemplateBinding Background}"
                         BorderThickness="{TemplateBinding BorderThickness}">
-                        <!-- Изменено: StackPanel с горизонтальной ориентацией -->
                         <StackPanel Orientation="Horizontal" 
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
@@ -191,17 +185,13 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <!-- Мягкий фиолетовый вместо акцентного -->
                             <Setter TargetName="border" Property="Background" Value="#FFEFE5FF"/>
                             <Setter TargetName="textBlock" Property="Foreground" Value="{StaticResource DarkPurple}"/>
-                            <!-- Убираем белую тень иконки -->
                             <Setter TargetName="iconImage" Property="Effect" Value="{x:Null}"/>
-                            <!-- Тонкая акцентная рамка снизу -->
                             <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
                             <Setter TargetName="border" Property="BorderThickness" Value="0,0,0,2"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <!-- Полупрозрачное свечение -->
                             <Setter TargetName="border" Property="Background" Value="#15FFFFFF"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -210,16 +200,15 @@
         </Setter>
     </Style>
 
-    <!-- 12. Основной стиль для всех UserControl -->
+    <!-- 12. СТИЛЬ ДЛЯ ВСЕХ UserControl -->
     <Style x:Key="BaseUserControlStyle" TargetType="UserControl">
-        <!-- Наследуем цветовую схему главного окна -->
         <Setter Property="Background" Value="{StaticResource WindowBackground}"/>
         <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
         <Setter Property="FontFamily" Value="{DynamicResource MainFont}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderGradient}"/>
     </Style>
 
-    <!-- 13. Cтиль для плашек с подсказками -->
+    <!-- 13. CТИЛЬ ДЛЯ ПЛАШЕК С ПОДСКАЗКАМИ -->
     <Style x:Key="HelpBorderBoxStyle" TargetType="Border">
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderGradient}"/>
@@ -228,7 +217,7 @@
         <Setter Property="Margin" Value="10,10,10,0"/>
     </Style>
 
-    <!-- 14. Стиль текста в блоках справки -->
+    <!-- 14. СТИЛЬ ТЕКСТА В БЛОКАХ СПРАВКИ -->
     <Style x:Key="HelpTextBoxStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{DynamicResource MainFont}"/>
         <Setter Property="Foreground" Value="{StaticResource MediumPurple}"/>
@@ -236,9 +225,8 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    <!-- 15. Простой кастомный стиль слайдера -->
+    <!-- 15. СТИЛЬ СЛАЙДЕРА -->
     <Style x:Key="SliderStyle" TargetType="Slider">
-        <!-- Базовые свойства -->
         <Setter Property="Foreground" Value="{StaticResource DarkPurple}"/>
         <Setter Property="Background" Value="{StaticResource LightPurple}"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -307,7 +295,7 @@
         </Setter>
     </Style>
 
-    <!-- 16. Стиль для кнопок OK/Да/Нет в ShowBox -->
+    <!-- 16. СТИЛЬ ДЛЯ КНОПОК OK/ДА/НЕТ В ShowBox -->
     <Style x:Key="SimpleDialogButton" TargetType="Button">
         <!-- Текстовые свойства -->
         <Setter Property="FontFamily" Value="{DynamicResource MainBoldFont}"/>
@@ -365,15 +353,13 @@
         </Setter>
     </Style>
 
-    <!-- 17. Стиль для ScrollBar Thumb (ползунка) -->
-    <!-- Ретро-стиль для ScrollBar Thumb (ползунка) -->
+    <!-- 17. СТИЛЬ ДЛЯ ScrollBar Thumb (ПОЛЗУНКА) -->
     <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="IsTabStop" Value="false"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
-                    <!-- Прямоугольный ползунок без скруглений -->
                     <Rectangle x:Name="thumbRect" 
                            Fill="{StaticResource MediumPurple}" 
                            Stroke="{StaticResource DarkPurple}" 

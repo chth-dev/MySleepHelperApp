@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 using MySleepHelperApp.Services;
 
@@ -7,7 +6,6 @@ namespace MySleepHelperApp
 {
     public partial class TransparentOverlay : Window
     {
-        // Изменяем на nullable поле
         private readonly KeyboardHook? _keyboardHook;
 
         public TransparentOverlay()
@@ -23,7 +21,7 @@ namespace MySleepHelperApp
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка блокировки клавиатуры: {ex.Message}");
-                _keyboardHook = null; // Явное указание null
+                _keyboardHook = null; 
                 Close();
             }
         }

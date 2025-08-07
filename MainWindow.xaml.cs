@@ -10,7 +10,7 @@ namespace MySleepHelperApp
 {
     public partial class MainWindow : Window
     {
-        private TaskbarIcon notifyIcon;
+        private TaskbarIcon? notifyIcon;
         private HomeView _homeView;
         private ShutdownTimerView _shutdownTimerView;
         internal BrightnessView _brightnessView;
@@ -178,7 +178,7 @@ namespace MySleepHelperApp
         {
             HideToTray(); // Скрываем окно в трей        
             
-            // Проверяем активен ли таймер выключения через ваш UserControl
+            // Проверяем активен ли таймер выключения через UserControl
             bool isShutdownTimerActive = _shutdownTimerView?.IsTimerActive ?? false;
 
             // Показываем уведомление только если таймер активен

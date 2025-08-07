@@ -11,11 +11,8 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <!-- Заголовок -->
                 <RowDefinition Height="*"/>
-                <!-- Основное содержимое -->
                 <RowDefinition Height="Auto"/>
-                <!-- Кнопки -->
             </Grid.RowDefinitions>
 
             <!-- Заголовок -->
@@ -34,16 +31,14 @@
                 Width="500"
                 Height="180"
                 VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                >
+                HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Border 
                     Grid.Column="0"
                     x:Name="InputPanel"
-                    Margin="90,20"
-                    >
+                    Margin="90,20">
                     <UniformGrid  Columns="3" VerticalAlignment="Center">
                         <!-- Часы -->
                         <StackPanel Margin="5">
@@ -52,71 +47,79 @@
                            FontSize="20" 
                            Margin="0,0,0,5"/>
                             <Grid Width="80" Height="60">
-                                <TextBox x:Name="HoursTextBox"
-                             Style="{StaticResource TimeInputTextBox}"
-                             PreviewTextInput="TextBox_PreviewTextInput"
-                             PreviewKeyDown="TextBox_PreviewKeyDown"
-                             GotFocus="TextBox_GotFocus"
-                             LostFocus="TextBox_LostFocus"/>
-                                <TextBlock x:Name="HoursTextBoxPlaceholder"
-                               Text="00"
-                               FontSize="30"
-                               Opacity="0.4"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               IsHitTestVisible="False" 
-                               FontWeight="Bold" 
-                               Style="{StaticResource HeaderTextStyle}"/>
+                                <TextBox 
+                                     x:Name="HoursTextBox"
+                                     Style="{StaticResource TimeInputTextBox}"
+                                     PreviewTextInput="TextBox_PreviewTextInput"
+                                     PreviewKeyDown="TextBox_PreviewKeyDown"
+                                     GotFocus="TextBox_GotFocus"
+                                     LostFocus="TextBox_LostFocus"/>
+                                <TextBlock 
+                                   x:Name="HoursTextBoxPlaceholder"
+                                   Text="00"
+                                   FontSize="30"
+                                   Opacity="0.4"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   IsHitTestVisible="False" 
+                                   FontWeight="Bold" 
+                                   Style="{StaticResource HeaderTextStyle}"/>
                             </Grid>
                         </StackPanel>
 
                         <!-- Минуты -->
                         <StackPanel Margin="5">
-                            <TextBlock Text="Минуты"
-                           Style="{StaticResource HeaderTextStyle}"
-                           FontSize="20" 
-                           Margin="0,0,0,5"/>
+                            <TextBlock 
+                               Text="Минуты"
+                               Style="{StaticResource HeaderTextStyle}"
+                               FontSize="20" 
+                               Margin="0,0,0,5"/>
                             <Grid Width="80" Height="60">
-                                <TextBox x:Name="MinutesTextBox"
-                             Style="{StaticResource TimeInputTextBox}"
-                             PreviewTextInput="TextBox_PreviewTextInput"
-                             PreviewKeyDown="TextBox_PreviewKeyDown"
-                             GotFocus="TextBox_GotFocus"
-                             LostFocus="TextBox_LostFocus"/>
-                                <TextBlock x:Name="MinutesTextBoxPlaceholder"
-                               Text="00"
-                               FontSize="30"
-                               Opacity="0.4"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               IsHitTestVisible="False" 
-                               FontWeight="Bold" 
-                               Style="{StaticResource HeaderTextStyle}"/>
+                                <TextBox 
+                                     x:Name="MinutesTextBox"
+                                     Style="{StaticResource TimeInputTextBox}"
+                                     PreviewTextInput="TextBox_PreviewTextInput"
+                                     PreviewKeyDown="TextBox_PreviewKeyDown"
+                                     GotFocus="TextBox_GotFocus"
+                                     LostFocus="TextBox_LostFocus"/>
+                                <TextBlock 
+                                       x:Name="MinutesTextBoxPlaceholder"
+                                       Text="00"
+                                       FontSize="30"
+                                       Opacity="0.4"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       IsHitTestVisible="False" 
+                                       FontWeight="Bold" 
+                                       Style="{StaticResource HeaderTextStyle}"/>
                             </Grid>
                         </StackPanel>
 
                         <!-- Секунды -->
                         <StackPanel Margin="5">
-                            <TextBlock Text="Секунды" 
-                           Style="{StaticResource HeaderTextStyle}"
-                           FontSize="20" 
-                           Margin="0,0,0,5"/>
+                            <TextBlock 
+                                   Text="Секунды" 
+                                   Style="{StaticResource HeaderTextStyle}"
+                                   FontSize="20" 
+                                   Margin="0,0,0,5"/>
                             <Grid Width="80" Height="60">
-                                <TextBox x:Name="SecondsTextBox"
-                             Style="{StaticResource TimeInputTextBox}"
-                             PreviewTextInput="TextBox_PreviewTextInput"
-                             PreviewKeyDown="TextBox_PreviewKeyDown"
-                             GotFocus="TextBox_GotFocus"
-                             LostFocus="TextBox_LostFocus"/>
-                                <TextBlock x:Name="SecondsTextBoxPlaceholder"
-                               Style="{StaticResource HeaderTextStyle}"
-                               Text="00"
-                               FontSize="30"
-                               Opacity="0.4"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               IsHitTestVisible="False" 
-                               FontWeight="Bold"/>
+                                <TextBox 
+                                     x:Name="SecondsTextBox"
+                                     Style="{StaticResource TimeInputTextBox}"
+                                     PreviewTextInput="TextBox_PreviewTextInput"
+                                     PreviewKeyDown="TextBox_PreviewKeyDown"
+                                     GotFocus="TextBox_GotFocus"
+                                     LostFocus="TextBox_LostFocus"/>
+                                <TextBlock 
+                                       x:Name="SecondsTextBoxPlaceholder"
+                                       Style="{StaticResource HeaderTextStyle}"
+                                       Text="00"
+                                       FontSize="30"
+                                       Opacity="0.4"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       IsHitTestVisible="False" 
+                                       FontWeight="Bold"/>
                             </Grid>
                         </StackPanel>
                     </UniformGrid>
@@ -126,8 +129,7 @@
                 <Border 
                     Grid.Column="0"
                     x:Name="TimerPanel" 
-                    Margin="0"
-                    >
+                    Margin="0">
                     <TextBlock 
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center"
@@ -164,10 +166,10 @@
 
         <!-- Изображение -->
         <Image 
-                           Source="{StaticResource ShutdownImage}"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Bottom"
-                           Margin="10,0,0,5" Height="auto" Width="220">
+            Source="{StaticResource ShutdownImage}"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Margin="10,0,0,5" Height="auto" Width="220">
         </Image>
 
     </Grid>
