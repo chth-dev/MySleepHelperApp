@@ -98,6 +98,7 @@
         </StackPanel>
 
         <TextBlock 
+           x:Name="HotKeyText"
            Grid.Row="4" 
            Grid.Column="0"
            Grid.ColumnSpan="2"

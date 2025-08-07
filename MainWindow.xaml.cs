@@ -14,7 +14,7 @@ namespace MySleepHelperApp
         private HomeView _homeView;
         private ShutdownTimerView _shutdownTimerView;
         internal BrightnessView _brightnessView;
-        private KeyboardLockView _keyboardView;
+        private KeyboardLockView? _keyboardView;
         private HelpView _helpView;
 
         public MainWindow()
@@ -46,6 +46,12 @@ namespace MySleepHelperApp
             {
                 System.Diagnostics.Debug.WriteLine("Ошибка: TaskbarIcon не найден в XAML по имени 'MyNotifyIcon'.");
             }
+
+            // Подписываемся на событие изменения состояния блокировки клавиатуры
+            if (_keyboardView != null)
+            {
+                _keyboardView.KeyboardLockStateChanged += OnKeyboardLockStateChanged;
+            }
         }
 
         private void SwitchToTab(UserControl tabContent, string headerText)
@@ -74,7 +80,7 @@ namespace MySleepHelperApp
         private void KeyboardTab_Checked(object sender, RoutedEventArgs e)
         {
             if (KeyboardTab.IsChecked == true)
-                SwitchToTab(_keyboardView, "Блокировка клавиатуры");
+                SwitchToTab(_keyboardView!, "Блокировка клавиатуры");
         }
 
         private void HelpTab_Checked(object sender, RoutedEventArgs e)
@@ -234,6 +240,12 @@ namespace MySleepHelperApp
         {
             Debug.WriteLine("[MainWindow] Двойной клик по иконке в трее.");
             ShowMainWindow(); // Показываем главное окно
+        }
+
+        private void OnKeyboardLockStateChanged(object? sender, bool isLocked)
+        {
+            // Просим BrightnessView обновить текст в зависимости от состояния блокировки
+            _brightnessView?.UpdateHotKeyText(isLocked);
         }
     }
 }

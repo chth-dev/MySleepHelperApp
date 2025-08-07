@@ -90,5 +90,25 @@ namespace MySleepHelperApp.Views
                 BrightnessControlsPanel.Opacity = isEnabled ? 1.0 : 0.5;
             }
         }
+
+        // Метод для обновления текста горячих клавиш
+        public void UpdateHotKeyText(bool isKeyboardLocked)
+        {
+            // Проверяем, что TextBlock с горячими клавишами существует
+            // HotKeyText - это x:Name из XAML
+            if (HotKeyText != null)
+            {
+                if (isKeyboardLocked)
+                {
+                    // Если клавиатура заблокирована, показываем предупреждение
+                    HotKeyText.Text = "При заблокированной клавиатуре горячие клавиши не активны.";
+                }
+                else
+                {
+                    // Если клавиатура разблокирована, показываем обычный текст
+                    HotKeyText.Text = "Ctrl Alt \"-\" - уменьшить яркость | Ctrl Alt \"+\" - увеличить яркость";
+                }
+            }
+        }
     }
 }

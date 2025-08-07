@@ -7,6 +7,8 @@ namespace MySleepHelperApp.Views
 {
     public partial class KeyboardLockView : UserControl
     {
+        public event EventHandler<bool>? KeyboardLockStateChanged;
+
         private KeyboardHook? _keyboardHook;
         private static TransparentOverlay? _currentBlocker;
 
@@ -72,6 +74,8 @@ namespace MySleepHelperApp.Views
 
             // 2. Обновляем плашку
             UpdateStatusPanel(isLocked);
+
+            KeyboardLockStateChanged?.Invoke(this, isLocked);
         }
 
         private void ResetUI()
@@ -88,6 +92,7 @@ namespace MySleepHelperApp.Views
                 ButtonText.Text = "Разблокировать";
                 KeyboardLockButton.Click -= KeyboardLockButton_Click; // Удаляем старый обработчик
                 KeyboardLockButton.Click += KeyboardUnLockButton_Click;     // Добавляем новый
+
             }
             else
             {
