@@ -32,10 +32,14 @@ namespace MySleepHelperApp
         // Уникальные ID для горячих клавиш
         private const int HOTKEY_ID_INCREASE = 9001;
         private const int HOTKEY_ID_DECREASE = 9002;
+        private const int HOTKEY_ID_INCREASE_NUMPAD = 9003;
+        private const int HOTKEY_ID_DECREASE_NUMPAD = 9004;
 
         // Коды виртуальных клавиш (VK codes)
-        private const uint VK_OEM_PLUS = 0xBB;  // Клавиша "+"
-        private const uint VK_OEM_MINUS = 0xBD; // Клавиша "-"
+        private const uint VK_OEM_PLUS = 0xBB;   // Клавиша "+" (обычная)
+        private const uint VK_OEM_MINUS = 0xBD;  // Клавиша "-" (обычная)
+        private const uint VK_ADD = 0x6B;        // Клавиша "+" (нумпад)
+        private const uint VK_SUBTRACT = 0x6D;   // Клавиша "-" (нумпад)
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -55,9 +59,13 @@ namespace MySleepHelperApp
             _hwndSource = HwndSource.FromHwnd(hwnd);
             _hwndSource.AddHook(HwndHook);
 
-            // Регистрируем Ctrl + Alt + "+" и Ctrl + Alt + "-"
+            // Регистрируем Ctrl + Alt + "+" и Ctrl + Alt + "-" (обычные клавиши)
             bool result1 = RegisterHotKey(hwnd, HOTKEY_ID_INCREASE, MOD_CONTROL | MOD_ALT, VK_OEM_PLUS);
             bool result2 = RegisterHotKey(hwnd, HOTKEY_ID_DECREASE, MOD_CONTROL | MOD_ALT, VK_OEM_MINUS);
+
+            // Регистрируем Ctrl + Alt + "+" и Ctrl + Alt + "-" (клавиши нумпада)
+            bool result3 = RegisterHotKey(hwnd, HOTKEY_ID_INCREASE_NUMPAD, MOD_CONTROL | MOD_ALT, VK_ADD);
+            bool result4 = RegisterHotKey(hwnd, HOTKEY_ID_DECREASE_NUMPAD, MOD_CONTROL | MOD_ALT, VK_SUBTRACT);
 
             if (!result1 || !result2)
             {
@@ -76,10 +84,12 @@ namespace MySleepHelperApp
                 switch (id)
                 {
                     case HOTKEY_ID_INCREASE:
+                    case HOTKEY_ID_INCREASE_NUMPAD: // Обрабатываем оба варианта увеличения
                         AdjustBrightness(5.0);
                         handled = true;
                         break;
                     case HOTKEY_ID_DECREASE:
+                    case HOTKEY_ID_DECREASE_NUMPAD: // Обрабатываем оба варианта уменьшения
                         AdjustBrightness(-5.0);
                         handled = true;
                         break;
@@ -128,6 +138,8 @@ namespace MySleepHelperApp
                 {
                     UnregisterHotKey(hwnd, HOTKEY_ID_INCREASE);
                     UnregisterHotKey(hwnd, HOTKEY_ID_DECREASE);
+                    UnregisterHotKey(hwnd, HOTKEY_ID_INCREASE_NUMPAD); 
+                    UnregisterHotKey(hwnd, HOTKEY_ID_DECREASE_NUMPAD); 
                 }
 
                 _hwndSource.RemoveHook(HwndHook);
